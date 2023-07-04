@@ -1,3 +1,4 @@
+import "./TopBar.scss";
 function TopBar() {
   return (
     <div className="top-bar">

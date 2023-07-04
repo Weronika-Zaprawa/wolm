@@ -1,0 +1,9 @@
+@use "../base.scss";
+
+.home-page-wrapper {
+  background-color: base.$white;
+  $padding: 32px;
+  width: calc(100vw - 2 * $padding);
+  height: calc(100vh - 2 * $padding);
+  padding: $padding;
+}
