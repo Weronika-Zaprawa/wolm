@@ -18,9 +18,13 @@
     font-style: normal;
     font-weight: 500;
     line-height: 20px;
+    border-color: transparent;
+    transition: border-color 0.4s;
 
     &.active {
       color: base.$primary-700;
+      border-bottom: solid 2px;
+      border-color: base.$primary-700;
     }
   }
 }

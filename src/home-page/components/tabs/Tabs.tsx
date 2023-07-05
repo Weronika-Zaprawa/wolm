@@ -1,30 +1,40 @@
 import { useState } from "react";
 import "./Tabs.scss";
-import { type } from "os";
 
 type TabName = "fruits" | "vegetables";
 
 function Tabs() {
   const [activeTabName, setActiveTabName] = useState<TabName>("fruits");
 
-  console.log(activeTabName);
+  // const handleTabClick = (tabName: TabName) => {
+  //   setActiveTabName(tabName);
+
+  //   if (activeTabName != tabName) {
+  //     console.log(tabName);
+  //   }
+  // };
+  function handleTabClick(plants: TabName) {
+    if (activeTabName != plants) {
+      setActiveTabName(plants);
+    }
+  }
 
   return (
     <div className="tabs-wrapper">
       <div
-        className={`tab-item ${activeTabName === "fruits" ? "active" : ""}`}
-        onClick={() => setActiveTabName("fruits")}
+        // className={`tab-item ${activeTabName === "fruits" ? "active" : ""}`}
+        className={"tab-item " + (activeTabName === "fruits" ? "active" : "")}
+        onClick={() => handleTabClick("fruits")}
       >
         Owoce
       </div>
       <div
         className={`tab-item ${activeTabName === "vegetables" ? "active" : ""}`}
-        onClick={() => setActiveTabName("vegetables")}
+        onClick={() => handleTabClick("vegetables")}
       >
         Warzywa
       </div>
     </div>
   );
 }
-
 export default Tabs;
