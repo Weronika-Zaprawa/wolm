@@ -1,0 +1,30 @@
+@use "../../../base.scss";
+
+.tabs-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid base.$gray-200;
+  width: 100%;
+  gap: 8px;
+  margin-top: 24px;
+
+  .tab-item {
+    color: base.$gray-500;
+    padding: 0px 4px 16px 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    border-color: transparent;
+    transition: border-color 0.4s;
+
+    &.active {
+      color: base.$primary-700;
+      border-bottom: solid 2px;
+      border-color: base.$primary-700;
+    }
+  }
+}
