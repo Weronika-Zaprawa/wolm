@@ -15,4 +15,35 @@
   background: base.$white;
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.06),
     0px 1px 3px 0px rgba(16, 24, 40, 0.1);
+
+  table {
+    width: 100%;
+    background: base.$white;
+
+    tr {
+      border-bottom: 1px solid base.$gray-200;
+      height: 44px;
+      padding: 12px 24px;
+      gap: 12px;
+
+      td {
+        text-align: start;
+        height: 44px;
+        padding: 12px 24px;
+        gap: 12px;
+      }
+    }
+
+    .header-row {
+      border-bottom: 1px solid base.$gray-200;
+      background: base.$gray-50;
+
+      th {
+        text-align: start;
+        height: 44px;
+        padding: 12px 24px;
+        gap: 12px;
+      }
+    }
+  }
 }
