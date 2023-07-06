@@ -6,4 +6,6 @@
   width: calc(100vw - 2 * $padding);
   height: calc(100vh - 2 * $padding);
   padding: $padding;
+
+  overflow-x: hidden;
 }
