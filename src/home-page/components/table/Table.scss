@@ -2,7 +2,6 @@
 
 .table-container {
   width: 100%;
-  height: 540px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -19,6 +18,16 @@
   table {
     width: 100%;
     background: base.$white;
+    border-spacing: 0px;
+
+    p {
+      color: base.$gray-900;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 20px;
+      margin-top: 0px;
+    }
 
     tr {
       border-bottom: 1px solid base.$gray-200;
@@ -30,19 +39,106 @@
         text-align: start;
         height: 44px;
         padding: 12px 24px;
-        gap: 12px;
+        color: base.$gray-500;
+        border-bottom: 1px solid base.$gray-200;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+
+        .pill {
+          width: fit-content;
+          display: flex;
+          align-items: flex-start;
+          mix-blend-mode: multiply;
+
+          display: flex;
+          padding: 2px 8px 2px 6px;
+          justify-content: center;
+          align-items: center;
+          gap: 6px;
+          border-radius: 16px;
+          background: base.$gray-200;
+          color: base.$gray-700;
+
+          text-align: center;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 18px;
+
+          &.fresh {
+            color: base.$success-700;
+            background: base.$success-50;
+          }
+          &.widhered {
+            color: base.$error-700;
+            background: base.$error-50;
+          }
+        }
+
+        .icon-container {
+          display: flex;
+          height: 72px;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+
+          .icon {
+            display: flex;
+            padding: 10px;
+            align-items: center;
+            gap: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+          }
+        }
       }
     }
 
     .header-row {
       border-bottom: 1px solid base.$gray-200;
-      background: base.$gray-50;
+      background-color: base.$gray-50;
+      color: base.$gray-500;
+
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 18px;
 
       th {
         text-align: start;
         height: 44px;
         padding: 12px 24px;
-        gap: 12px;
+        background-color: base.$gray-50;
+        border-bottom: 1px solid base.$gray-200;
+      }
+    }
+  }
+  .footer {
+    display: flex;
+    padding: 12px 24px 16px 24px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+
+    border-top: 1px solid base.$gray-200;
+
+    .page-number {
+      color: base.$gray-700;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+    }
+    .page-changer {
+      display: flex;
+      gap: 12px;
+
+      .arrow {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
       }
     }
   }
