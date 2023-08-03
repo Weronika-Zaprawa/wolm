@@ -1,6 +1,12 @@
 @use "../../../base.scss";
 
 .delete-modal-wrapper {
+  position: absolute;
+  top: 50%; // ustawianie wrappera na środku strony (4 pierwsze linie)
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 300; //ustawia wrapper nad rozmytym tłem
+
   display: flex;
   width: 400px;
   padding: 24px;
@@ -35,9 +41,9 @@
     }
     .modal-header {
       align-self: stretch;
+
       color: base.$gray-900;
       text-align: center;
-
       font-size: 18px;
       font-style: normal;
       font-weight: 600;
@@ -79,6 +85,8 @@
     border: 1px solid base.$gray-300;
     background: base.$white;
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+
+    cursor: pointer;
   }
 
   .delete-button {
@@ -98,5 +106,24 @@
     background: base.$error-600;
 
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+
+    cursor: pointer;
   }
+}
+
+.delete-modal-background {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  z-index: 200;
+
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(52, 64, 84, 0.6);
+
+  //backdrop-filter: blur(12px);
 }
