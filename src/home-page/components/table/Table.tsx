@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Table.scss";
 import DeleteModal from "../delete-modal/DeleteModal";
+import EditModal from "../edit-modal/EditModal";
 
 function Table() {
   const [deleteModalVisible, setDeleteModalVisible] = useState<Boolean>(false);
@@ -135,6 +136,7 @@ function Table() {
       {deleteModalVisible ? (
         <DeleteModal setDeleteModalVisible={setDeleteModalVisible} />
       ) : null}
+      <EditModal />
     </div>
   );
 }
