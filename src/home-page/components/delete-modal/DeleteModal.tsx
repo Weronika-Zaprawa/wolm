@@ -1,6 +1,10 @@
 import "./DeleteModal.scss";
 
-function DeleteModal() {
+function DeleteModal({
+  setDeleteModalVisible,
+}: {
+  setDeleteModalVisible: (visible: boolean) => void;
+}) {
   return (
     <div>
       <div className="delete-modal-wrapper">
@@ -30,8 +34,22 @@ function DeleteModal() {
           </div>
         </div>
         <div className="modal-buttons-wraper">
-          <div className="cancel-button">Anuluj</div>
-          <div className="delete-button">Usuń</div>
+          <div
+            className="cancel-button"
+            onClick={() => {
+              setDeleteModalVisible(false);
+            }}
+          >
+            Anuluj
+          </div>
+          <div
+            className="delete-button"
+            onClick={() => {
+              setDeleteModalVisible(false);
+            }}
+          >
+            Usuń
+          </div>
         </div>
       </div>
       <div className="delete-modal-background"></div>

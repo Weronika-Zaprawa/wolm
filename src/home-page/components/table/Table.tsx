@@ -132,7 +132,9 @@ function Table() {
           </div>
         </div>
       </div>
-      {deleteModalVisible ? <DeleteModal /> : null}
+      {deleteModalVisible ? (
+        <DeleteModal setDeleteModalVisible={setDeleteModalVisible} />
+      ) : null}
     </div>
   );
 }
