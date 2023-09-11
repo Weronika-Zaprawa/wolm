@@ -1,5 +1,10 @@
+import { useState } from "react";
 import "./TopBar.scss";
+import AddModal from "../add-modal/AddModal";
+
 function TopBar() {
+  const [addModalVisible, setAddModalVisible] = useState<Boolean>(false);
+  const handleClickOnAdd = () => setAddModalVisible(true);
   return (
     <div className="top-bar">
       <div className="top-bar-left-side">
@@ -11,8 +16,13 @@ function TopBar() {
         </div>
       </div>
       <div className="top-bar-right-side">
-        <div className="primary-button">+ Dodaj</div>
+        <div className="primary-button" onClick={() => handleClickOnAdd()}>
+          + Dodaj
+        </div>
       </div>
+      {addModalVisible ? (
+        <AddModal setAddModalVisible={setAddModalVisible} />
+      ) : null}
     </div>
   );
 }

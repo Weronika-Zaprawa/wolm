@@ -1,76 +1,46 @@
-import "./EditModal.scss";
+import Modal from "../modal/Modal";
+import HarvestForm from "../harvest-form/HarvestForm";
 
-function EditModal() {
+function EditModal({
+  setEditModalVisible,
+}: {
+  setEditModalVisible: (visible: boolean) => void;
+}) {
   const today = new Date();
   console.log(today.toISOString());
+
   return (
-    <div>
-      <div className="edit-modal-icon"></div>
-      <div className="edit-modal-title">
-        <h1>Edycja plonów</h1>
-        <p>Zaktualizuj informacje o plonach</p>
-      </div>
-      <form>
-        <div className="row">
-          <label htmlFor="name">Nazwa</label>
-          <input id="name" type="text" placeholder="Nazwa"></input>
-          <label htmlFor="date">Data</label>
-          <input
-            type="text"
-            placeholder="MM/DD/YYYY"
-            onFocus={(e) => (e.target.type = "date")}
-            onBlur={(e) => (e.target.type = "text")}
-          ></input>
-        </div>
-        <div className="row">
-          <label htmlFor="variety">Odmiana</label>
-          <input id="variety" type="text" placeholder="Odmiana"></input>
-          <label htmlFor="state">Stan</label>
-          <select id="state">
-            <option value="" disabled selected>
-              Stan
-            </option>
-            <option value="normal">Normalny</option>
-          </select>
-        </div>
-        <div className="row">
-          <label htmlFor="category">Kategoria</label>
-          <select id="category">
-            <option value="" disabled selected>
-              Kategoria
-            </option>
-            <option value="fruits">Owoce</option>
-          </select>
-          <label htmlFor="amount">Ilość</label>
-          <input
-            id="amount"
-            type="number"
-            placeholder="10"
-            min="0.1"
-            step="0.1"
-          ></input>
-          <label htmlFor="unit">Jednostka</label>
-          <select id="unit">
-            <option value="kg" selected>
-              kg
-            </option>
-            <option value="g">g</option>
-          </select>
-        </div>
-        <div className="row">
-          <label htmlFor="information">Informacje</label>
-          <input
-            id="information"
-            type="text"
-            placeholder="Dodatkowe informacje"
-          ></input>
-        </div>
-        <div className="modal-buttons-wrapper">
-          <div className="cancel-button">Anuluj</div>
-          <div className="delete-button">Usuń</div>
-        </div>
-      </form>
-    </div>
+    <Modal
+      header="Edycja plonów"
+      icon={
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M11 4.00001H4C3.46957 4.00001 2.96086 4.21073 2.58579 4.5858C2.21071 4.96087 2 5.46958 2 6.00001V20C2 20.5304 2.21071 21.0392 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0392 20 20.5304 20 20V13M18.5 2.50001C18.8978 2.10219 19.4374 1.87869 20 1.87869C20.5626 1.87869 21.1022 2.10219 21.5 2.50001C21.8978 2.89784 22.1213 3.4374 22.1213 4.00001C22.1213 4.56262 21.8978 5.10219 21.5 5.50001L12 15L8 16L9 12L18.5 2.50001Z"
+            stroke="#7F56D9"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      }
+      paragraph={<>Zaktualizuj informacje o plonach</>}
+      modalBody={<HarvestForm />}
+      theme="functional"
+      cancelButtonText="Anuluj"
+      onCancelButtonClick={() => {
+        setEditModalVisible(false);
+      }}
+      actionButtonText="Edytuj"
+      onActionButtonClick={() => {
+        setEditModalVisible(false);
+      }}
+    />
   );
 }
 

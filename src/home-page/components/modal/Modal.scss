@@ -1,6 +1,8 @@
 @use "../../../base.scss";
 
-.delete-modal-wrapper {
+$background-color: base.$error-100;
+
+.modal-wrapper {
   position: absolute;
   top: 50%; // ustawianie wrappera na środku strony (4 pierwsze linie)
   left: 50%;
@@ -37,7 +39,7 @@
 
       border-radius: 50%;
       border: 8px solid base.$error-50;
-      background: base.$error-100;
+      background: $background-color;
     }
     .modal-header {
       align-self: stretch;
@@ -62,7 +64,7 @@
   }
 }
 
-.modal-buttons-wraper {
+.modal-buttons-wrapper {
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -89,7 +91,7 @@
     cursor: pointer;
   }
 
-  .delete-button {
+  .action-button {
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -111,7 +113,7 @@
   }
 }
 
-.delete-modal-background {
+.modal-background {
   position: absolute;
   top: 0%;
   left: 0%;
@@ -125,5 +127,29 @@
 
   background: rgba(52, 64, 84, 0.6);
 
-  //backdrop-filter: blur(12px);
+  backdrop-filter: blur(3px);
+}
+
+.functional-theme {
+  .modal-wrapper {
+    .modal-content-wrapper {
+      align-items: flex-start;
+      .modal-icon {
+        background: base.$primary-100;
+        border: 8px solid base.$primary-50;
+      }
+      .modal-header {
+        text-align: left;
+      }
+      .modal-text {
+        text-align: left;
+      }
+    }
+    .modal-buttons-wrapper {
+      .action-button {
+        border: 1px solid base.$primary-600;
+        background: base.$primary-600;
+      }
+    }
+  }
 }
