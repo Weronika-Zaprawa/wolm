@@ -1,11 +1,14 @@
 import { useState } from "react";
 import "./Table.scss";
 import DeleteModal from "../delete-modal/DeleteModal";
+import EditModal from "../edit-modal/EditModal";
 
 function Table() {
   const [deleteModalVisible, setDeleteModalVisible] = useState<Boolean>(false);
-
   const handleClickOnBin = () => setDeleteModalVisible(true);
+
+  const [editModalVisible, setEditModalVisible] = useState<Boolean>(false);
+  const handleClickOnPencil = () => setEditModalVisible(true);
 
   return (
     <div>
@@ -34,7 +37,9 @@ function Table() {
                 <div className="icon" onClick={() => handleClickOnBin()}>
                   🗑️
                 </div>
-                <div className="icon">✏️</div>
+                <div className="icon" onClick={() => handleClickOnPencil()}>
+                  ✏️
+                </div>
               </div>
             </td>
           </tr>
@@ -134,6 +139,9 @@ function Table() {
       </div>
       {deleteModalVisible ? (
         <DeleteModal setDeleteModalVisible={setDeleteModalVisible} />
+      ) : null}
+      {editModalVisible ? (
+        <EditModal setEditModalVisible={setEditModalVisible} />
       ) : null}
     </div>
   );
