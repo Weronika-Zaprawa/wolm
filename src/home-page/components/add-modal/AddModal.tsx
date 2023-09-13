@@ -7,6 +7,8 @@ function AddModal({
 }: {
   setAddModalVisible: (visible: boolean) => void;
 }) {
+  const formRef = useRef<HTMLFormElement>(null);
+
   return (
     <Modal
       header="Dodawanie plonów"
@@ -28,7 +30,17 @@ function AddModal({
         </svg>
       }
       paragraph={<>Dodaj nowe informacje o plonach</>}
-      modalBody={<HarvestForm />}
+      modalBody={
+        <HarvestForm
+          onSubmit={(values) =>
+            console.log(
+              "🐶➕ tutaj ten od Dodawania, dostałem takie wartości: ",
+              values
+            )
+          }
+          formRef={formRef}
+        />
+      }
       theme="functional"
       cancelButtonText="Anuluj"
       onCancelButtonClick={() => {
@@ -36,6 +48,7 @@ function AddModal({
       }}
       actionButtonText="Dodaj"
       onActionButtonClick={() => {
+        formRef.current?.requestSubmit();
         setAddModalVisible(false);
       }}
     />

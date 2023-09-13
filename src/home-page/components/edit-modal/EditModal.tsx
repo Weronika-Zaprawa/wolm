@@ -1,5 +1,6 @@
 import Modal from "../modal/Modal";
 import HarvestForm from "../harvest-form/HarvestForm";
+import { useRef } from "react";
 
 function EditModal({
   setEditModalVisible,
@@ -8,6 +9,7 @@ function EditModal({
 }) {
   const today = new Date();
   console.log(today.toISOString());
+  const formRef = useRef<HTMLFormElement>(null);
 
   return (
     <Modal
@@ -30,7 +32,17 @@ function EditModal({
         </svg>
       }
       paragraph={<>Zaktualizuj informacje o plonach</>}
-      modalBody={<HarvestForm />}
+      modalBody={
+        <HarvestForm
+          onSubmit={(values) =>
+            console.log(
+              "🐶✏️ tutaj ten od Edycji, dostałem takie wartości: ",
+              values
+            )
+          }
+          formRef={formRef}
+        />
+      }
       theme="functional"
       cancelButtonText="Anuluj"
       onCancelButtonClick={() => {
@@ -38,6 +50,7 @@ function EditModal({
       }}
       actionButtonText="Edytuj"
       onActionButtonClick={() => {
+        formRef.current?.requestSubmit();
         setEditModalVisible(false);
       }}
     />
