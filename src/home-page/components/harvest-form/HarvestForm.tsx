@@ -1,4 +1,4 @@
-import { FormEvent, RefObject, useRef } from "react";
+import { FormEvent, RefObject } from "react";
 import { useState } from "react";
 import "./HarvestForm.scss";
 
