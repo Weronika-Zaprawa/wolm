@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Table.scss";
 import DeleteModal from "../delete-modal/DeleteModal";
 import EditModal from "../edit-modal/EditModal";
+import { useHarvest } from "../../services/HarvestContext";
 
 function Table() {
   const [deleteModalVisible, setDeleteModalVisible] = useState<Boolean>(false);
@@ -9,6 +10,10 @@ function Table() {
 
   const [editModalVisible, setEditModalVisible] = useState<Boolean>(false);
   const handleClickOnPencil = () => setEditModalVisible(true);
+
+  const { fruits } = useHarvest();
+
+  console.log(fruits);
 
   return (
     <div>
