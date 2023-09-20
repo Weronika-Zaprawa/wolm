@@ -26,18 +26,30 @@
       outline: 0px;
     }
   }
-  .secondary-button {
-    color: base.$gray-700;
+  .buttons-container {
     display: flex;
-    padding: 0px 16px;
-    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
 
-    border-radius: 8px;
-    border: 1px solid base.$gray-300;
-    background: base.$white;
-    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    .secondary-button {
+      color: base.$gray-700;
+      display: flex;
+      padding: 0px 16px;
+      align-items: center;
 
-    cursor: pointer;
-    user-select: none;
+      border-radius: 8px;
+      border: 1px solid base.$gray-300;
+      background: base.$white;
+      box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+
+      cursor: pointer;
+      user-select: none;
+
+      &.disabled {
+        cursor: none;
+        background-color: base.$gray-300;
+        pointer-events: none;
+      }
+    }
   }
 }

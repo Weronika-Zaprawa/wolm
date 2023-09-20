@@ -145,6 +145,12 @@
         width: 24px;
         height: 24px;
         cursor: pointer;
+
+        &.disabled {
+          cursor: none;
+          pointer-events: none;
+          color: base.$gray-300;
+        }
       }
     }
   }

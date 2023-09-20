@@ -1,6 +1,9 @@
+import { useHarvest } from "../../services/HarvestContext";
 import "./TableFilters.scss";
 
 function TableFilters() {
+  const { getFruits, fruits } = useHarvest();
+
   return (
     <div className="table-filters-container">
       <div className="custom-input-container">
@@ -10,7 +13,17 @@ function TableFilters() {
           placeholder="Szukaj na podstawie nazwy"
         />
       </div>
-      <div className="secondary-button">🐕‍🦺 Filtruj</div>
+      <div className="buttons-container">
+        <div
+          className={"secondary-button " + (fruits.loading ? "disabled" : "")}
+          onClick={() => {
+            getFruits(fruits.pagination.page);
+          }}
+        >
+          Odśwież
+        </div>
+        <div className="secondary-button">🐕‍🦺 Filtruj</div>
+      </div>
     </div>
   );
 }
