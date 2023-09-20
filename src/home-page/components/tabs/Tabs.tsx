@@ -26,7 +26,7 @@ function Tabs() {
         className={"tab-item " + (activeTabName === "fruits" ? "active" : "")}
         onClick={() => handleTabClick("fruits")}
       >
-        + Owoce
+        Owoce
       </div>
       <div
         className={`tab-item ${activeTabName === "vegetables" ? "active" : ""}`}

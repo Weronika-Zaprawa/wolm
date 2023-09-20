@@ -46,6 +46,7 @@
         font-weight: 400;
         line-height: 20px;
         min-width: 80px;
+        white-space: nowrap;
 
         &:first-child {
           //lub :nth-child(1)
