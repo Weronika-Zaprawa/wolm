@@ -8,7 +8,7 @@ import {
 
 type HarvestContextType = {
   fruits: FruitsState;
-  getFruits(): Promise<void>;
+  getFruits(index: number): Promise<void>;
 };
 
 type FruitsState = {
@@ -30,7 +30,7 @@ type Fruit = {
 };
 
 type Pagination = {
-  index: number;
+  page: number;
   size: number;
   items_total: number;
   pages_total: number;
@@ -46,27 +46,34 @@ const HarvestContext = createContext<HarvestContextType | undefined>(undefined);
 export const HarvestProvider = ({ children }: { children: ReactElement }) => {
   const [fruits, setFruits] = useState<FruitsState>({
     data: [],
-    pagination: { index: 0, size: 10, items_total: 0, pages_total: 0 },
+    pagination: { page: 0, size: 10, items_total: 0, pages_total: 0 },
     loading: true,
   });
 
-  async function getFruits() {
+  async function getFruits(index: number) {
     setFruits((prev) => {
       return { ...prev, loading: true };
     });
     const response = await fetch(
-      "https://wolm.onrender.com/harvests?page=0&size=10&sort_by=amount&sort_order=asc"
+      `https://wolm.onrender.com/harvests?page=${index}&size=10&sort_by=amount&sort_order=asc`
     );
-    const harvest: ResponseFruits = await response.json();
-    setFruits({
-      data: harvest.data,
-      pagination: harvest.pagination,
-      loading: false,
-    });
+    if (response.ok === true) {
+      const harvest: ResponseFruits = await response.json();
+      setFruits({
+        data: harvest.data,
+        pagination: harvest.pagination,
+        loading: false,
+      });
+    } else {
+      setFruits((prev) => {
+        return { ...prev, loading: false };
+      });
+      alert("Nie udało sie pobrać danych !");
+    }
   }
 
   useEffect(() => {
-    getFruits();
+    getFruits(0);
   }, []);
 
   return (

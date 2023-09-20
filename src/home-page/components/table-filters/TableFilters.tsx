@@ -16,7 +16,9 @@ function TableFilters() {
       <div className="buttons-container">
         <div
           className={"secondary-button " + (fruits.loading ? "disabled" : "")}
-          onClick={getFruits}
+          onClick={() => {
+            getFruits(fruits.pagination.page);
+          }}
         >
           Odśwież
         </div>

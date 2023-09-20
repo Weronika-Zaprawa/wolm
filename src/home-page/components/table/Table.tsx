@@ -11,9 +11,25 @@ function Table() {
   const [editModalVisible, setEditModalVisible] = useState<Boolean>(false);
   const handleClickOnPencil = () => setEditModalVisible(true);
 
-  const { fruits } = useHarvest();
+  const { fruits, getFruits } = useHarvest();
 
   console.log(fruits);
+
+  const index = Number(fruits.pagination.page);
+  const canGetNextPage = index < Number(fruits.pagination.pages_total) - 1;
+  const canGetPreviousPage = index > 0;
+
+  function getNextPage() {
+    if (canGetNextPage) {
+      getFruits(index + 1);
+    }
+  }
+
+  function getPreviousPage() {
+    if (canGetPreviousPage) {
+      getFruits(index - 1);
+    }
+  }
 
   return (
     <div>
@@ -135,10 +151,55 @@ function Table() {
           </tr>
         </table>
         <div className="footer">
-          <div className="page-number">Strona 1 z 10</div>
+          <div className="page-number">
+            Strona {index + 1} z {fruits.pagination.pages_total}
+          </div>
           <div className="page-changer">
-            <div className="arrow">⬅️</div>
-            <div className="arrow">➡️</div>
+            <div
+              className={
+                "arrow " +
+                (fruits.loading || !canGetPreviousPage ? "disabled" : "")
+              }
+              onClick={getPreviousPage}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M15 18L9 12L15 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div
+              className={
+                "arrow " + (fruits.loading || !canGetNextPage ? "disabled" : "")
+              }
+              onClick={getNextPage}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M9 18L15 12L9 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
           </div>
         </div>
       </div>
