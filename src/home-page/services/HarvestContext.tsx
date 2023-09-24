@@ -60,7 +60,7 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
     if (response.ok === true) {
       const harvest: ResponseFruits = await response.json();
       setFruits({
-        data: [],
+        data: harvest.data,
         pagination: harvest.pagination,
         loading: false,
       });
