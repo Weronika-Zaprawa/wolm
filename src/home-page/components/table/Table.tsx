@@ -34,6 +34,15 @@ function Table() {
   return (
     <div>
       <div className="table-container">
+        {fruits.loading === true && (
+          <div className="is-loading">
+            <div className="loading-spinner">
+              <div className="spin">
+                <div></div>
+              </div>
+            </div>
+          </div>
+        )}
         <table>
           <tr className="header-row">
             <th>Nazwa</th>
@@ -43,6 +52,15 @@ function Table() {
             <th>Stan</th>
             <th></th>
           </tr>
+          {fruits.data.length === 0 && (
+            <tr className="BBC">
+              {!fruits.loading && (
+                <td colSpan={8}>
+                  <h2>Brak dodanych owoców</h2>
+                </td>
+              )}
+            </tr>
+          )}
           {fruits.data.map((fruit) => {
             return (
               <tr>
