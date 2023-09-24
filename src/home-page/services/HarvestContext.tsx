@@ -55,7 +55,7 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
       return { ...prev, loading: true };
     });
     const response = await fetch(
-      `https://wolm.onrender.com/harvests?page=${index}&size=10&sort_by=amount&sort_order=asc`
+      `https://wolm.onrender.com/harvests?page=${index}&size=5&sort_by=amount&sort_order=asc`
     );
     if (response.ok === true) {
       const harvest: ResponseFruits = await response.json();
