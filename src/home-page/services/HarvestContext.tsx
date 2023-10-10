@@ -9,6 +9,7 @@ import {
 type HarvestContextType = {
   fruits: FruitsState;
   getFruits(index: number): Promise<void>;
+  deleteFruit(fruitId: string): Promise<void>;
 };
 
 type FruitsState = {
@@ -72,12 +73,26 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
     }
   }
 
+  async function deleteFruit(fruitId: string) {
+    await fetch(`https://wolm.onrender.com/harvests/${fruitId}`, {
+      method: "DELETE",
+    });
+
+    return;
+  }
+
   useEffect(() => {
     getFruits(0);
   }, []);
 
+  useEffect(() => {
+    if (fruits.data.length === 0 && fruits.pagination.pages_total > 0) {
+      getFruits(fruits.pagination.pages_total - 1);
+    }
+  }, [fruits.data.length, fruits.pagination.pages_total]);
+
   return (
-    <HarvestContext.Provider value={{ fruits, getFruits }}>
+    <HarvestContext.Provider value={{ fruits, getFruits, deleteFruit }}>
       {children}
     </HarvestContext.Provider>
   );
