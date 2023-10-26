@@ -13,6 +13,7 @@ function Table() {
   const [fruitToDeleteId, setFruitToDeleteId] = useState<string | null>(null);
 
   const { fruits, getFruits } = useHarvest();
+  const { dictionary } = useHarvest();
 
   const handleClickOnBin = (fruitId: string) => {
     setFruitToDeleteId(fruitId);
@@ -34,6 +35,8 @@ function Table() {
       getFruits(index - 1);
     }
   }
+
+  console.log(dictionary);
 
   return (
     <div>
