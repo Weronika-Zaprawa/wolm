@@ -85,7 +85,16 @@ function Table() {
                   </td>
                   <td>{fruit.harvest_date}</td>
                   <td>
-                    <div className="pill">• {fruit.freshness}</div>
+                    {/* {dictionary.freshnesses.map((data) => {
+                      if (fruit.freshness === data.key) {
+                        return <div className="pill">{data.name}</div>;
+                      }
+                    })} */}
+                    <div className="pill">
+                      {dictionary.freshnesses.find(
+                        (freshness) => freshness.key === fruit.freshness
+                      )?.name ?? "Nieznany"}
+                    </div>
                   </td>
                   <td>
                     <div className="icon-container">

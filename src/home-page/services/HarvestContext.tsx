@@ -20,9 +20,9 @@ type FruitsState = {
 };
 
 type DictionaryState = {
-  categories: [];
-  freshnesses: [];
-  weight_units: [];
+  categories: DictionaryItem[];
+  freshnesses: DictionaryItem[];
+  weight_units: DictionaryItem[];
 };
 
 type DictionaryItem = {
