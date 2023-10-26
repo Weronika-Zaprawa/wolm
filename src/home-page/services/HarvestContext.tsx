@@ -10,6 +10,7 @@ type HarvestContextType = {
   fruits: FruitsState;
   getFruits(index: number): Promise<void>;
   deleteFruit(fruitId: string): Promise<void>;
+  dictionary: DictionaryState;
 };
 
 type FruitsState = {
@@ -18,6 +19,16 @@ type FruitsState = {
   loading: boolean;
 };
 
+type DictionaryState = {
+  categories: [];
+  freshnesses: [];
+  weight_units: [];
+};
+
+type DictionaryItem = {
+  name: string;
+  key: string;
+};
 type Fruit = {
   id: string;
   name: string;
@@ -42,6 +53,10 @@ type ResponseFruits = {
   pagination: Pagination;
 };
 
+type ResponseDictionary = {
+  data: DictionaryState;
+};
+
 const HarvestContext = createContext<HarvestContextType | undefined>(undefined);
 
 export const HarvestProvider = ({ children }: { children: ReactElement }) => {
@@ -49,6 +64,12 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
     data: [],
     pagination: { page: 0, size: 10, items_total: 0, pages_total: 0 },
     loading: true,
+  });
+
+  const [dictionary, setDictionary] = useState<DictionaryState>({
+    categories: [],
+    freshnesses: [],
+    weight_units: [],
   });
 
   async function getFruits(index: number) {
@@ -81,8 +102,21 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
     return;
   }
 
+  async function getDictionary() {
+    const responseDictionary = await fetch(
+      `https://wolm.onrender.com/harvests-dictionary`
+    );
+    const dictionary: ResponseDictionary = await responseDictionary.json();
+    setDictionary({
+      categories: dictionary.data.categories,
+      freshnesses: dictionary.data.freshnesses,
+      weight_units: dictionary.data.weight_units,
+    });
+  }
+
   useEffect(() => {
     getFruits(0);
+    getDictionary();
   }, []);
 
   useEffect(() => {
@@ -92,7 +126,9 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
   }, [fruits.data.length, fruits.pagination.pages_total]);
 
   return (
-    <HarvestContext.Provider value={{ fruits, getFruits, deleteFruit }}>
+    <HarvestContext.Provider
+      value={{ fruits, getFruits, deleteFruit, dictionary }}
+    >
       {children}
     </HarvestContext.Provider>
   );
