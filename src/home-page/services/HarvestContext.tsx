@@ -10,6 +10,7 @@ type HarvestContextType = {
   fruits: FruitsState;
   getFruits(index: number): Promise<void>;
   deleteFruit(fruitId: string): Promise<void>;
+  // postFruit(): Promise<void>;
   dictionary: DictionaryState;
 };
 
@@ -72,6 +73,8 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
     weight_units: [],
   });
 
+  const [fruit, setFruit] = useState<Fruit>();
+
   async function getFruits(index: number) {
     setFruits((prev) => {
       return { ...prev, loading: true };
@@ -113,6 +116,12 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
       weight_units: dictionary.data.weight_units,
     });
   }
+
+  // async function postFruit() {
+  //   const response = await fetch(`https://wolm.onrender.com/harvests`, {
+  //     method: "POST",
+  //   });
+  // }
 
   useEffect(() => {
     getFruits(0);

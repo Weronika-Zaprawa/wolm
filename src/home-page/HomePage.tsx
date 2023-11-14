@@ -8,10 +8,10 @@ import { HarvestProvider } from "./services/HarvestContext";
 function HomePage() {
   return (
     <div className="home-page-wrapper">
-      <TopBar />
-      <Tabs />
       <HarvestProvider>
         <>
+          <TopBar />
+          <Tabs />
           <TableFilters />
           <Table />
         </>

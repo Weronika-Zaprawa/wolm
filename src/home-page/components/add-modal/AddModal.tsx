@@ -1,7 +1,8 @@
 import Modal from "../modal/Modal";
 import HarvestForm from "../harvest-form/HarvestForm";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import PlusIcon from "../../../images/icons/plus";
+import { useHarvest } from "../../services/HarvestContext";
 
 function AddModal({
   setAddModalVisible,
@@ -9,20 +10,30 @@ function AddModal({
   setAddModalVisible: (visible: boolean) => void;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
+  const { getFruits, fruits } = useHarvest();
+  const [formSubmitInProgress, setFormSubmitInProgress] =
+    useState<boolean>(false);
 
   return (
     <Modal
+      actionButtonDisabled={formSubmitInProgress}
       header="Dodawanie plonów"
       icon={<PlusIcon />}
       paragraph={<>Dodaj nowe informacje o plonach</>}
       modalBody={
         <HarvestForm
-          onSubmit={(values) =>
-            console.log(
-              "🐶➕ tutaj ten od Dodawania, dostałem takie wartości: ",
-              values
-            )
-          }
+          onSubmit={async (values) => {
+            setFormSubmitInProgress(true);
+            await fetch(`https://wolm.onrender.com/harvests`, {
+              method: "POST",
+              body: JSON.stringify(values),
+              headers: { "Content-Type": "application/json" },
+            });
+
+            setAddModalVisible(false);
+
+            getFruits(fruits.pagination.page);
+          }}
           formRef={formRef}
         />
       }
@@ -34,7 +45,6 @@ function AddModal({
       actionButtonText="Dodaj"
       onActionButtonClick={() => {
         formRef.current?.requestSubmit();
-        setAddModalVisible(false);
       }}
     />
   );

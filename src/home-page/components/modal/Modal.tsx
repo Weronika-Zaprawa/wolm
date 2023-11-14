@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 import "./Modal.scss";
+
 type ModalProps = {
   icon: ReactElement;
   header: string;
@@ -10,6 +11,7 @@ type ModalProps = {
   onActionButtonClick: () => void;
   modalBody?: ReactElement;
   theme: "danger" | "functional";
+  actionButtonDisabled?: boolean;
 };
 
 function Modal({
@@ -22,6 +24,7 @@ function Modal({
   onActionButtonClick,
   modalBody,
   theme,
+  actionButtonDisabled = false,
 }: ModalProps) {
   return (
     <div className={`${theme}-theme`}>
@@ -36,7 +39,12 @@ function Modal({
           <div className="cancel-button" onClick={onCancelButtonClick}>
             {cancelButtonText}
           </div>
-          <div className="action-button" onClick={onActionButtonClick}>
+          <div
+            className={
+              "action-button " + (actionButtonDisabled ? "disabled" : "")
+            }
+            onClick={onActionButtonClick}
+          >
             {actionButtonText}
           </div>
         </div>
