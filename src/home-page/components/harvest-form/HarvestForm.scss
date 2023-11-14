@@ -33,6 +33,12 @@ $row-gap: 16px;
     background: base.$white;
 
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+
+    &.is-invalid {
+      border-style: solid;
+      border-width: 1px;
+      border-color: red;
+    }
   }
   select {
     display: flex;
@@ -44,10 +50,16 @@ $row-gap: 16px;
     background: base.$white;
 
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+
+    &.is-invalid {
+      border-style: solid;
+      border-width: 1px;
+      border-color: red;
+    }
   }
 
   .extra-small {
-    width: calc(20% - $row-gap);
+    width: calc(25% - $row-gap);
   }
 
   .small {
@@ -55,7 +67,7 @@ $row-gap: 16px;
   }
 
   .medium {
-    width: calc(50% - $row-gap);
+    width: calc(45% - $row-gap);
   }
 
   .large {
@@ -65,4 +77,10 @@ $row-gap: 16px;
   .extra-large {
     width: calc(100% - $row-gap);
   }
+}
+
+.invalid-feedback {
+  padding: 2px;
+  color: red;
+  font-size: small;
 }
