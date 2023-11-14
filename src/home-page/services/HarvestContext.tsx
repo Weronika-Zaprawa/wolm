@@ -72,8 +72,6 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
     weight_units: [],
   });
 
-  const [fruit, setFruit] = useState<Fruit>();
-
   async function getFruits(index: number) {
     setFruits((prev) => {
       return { ...prev, loading: true };
