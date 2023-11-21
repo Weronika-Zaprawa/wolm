@@ -7,10 +7,11 @@ import BinIcon from "../../../images/icons/bin";
 import PencilIcon from "../../../images/icons/pencil";
 import LeftArrowIcon from "../../../images/icons/leftArrow";
 import RightArrowIcon from "../../../images/icons/rightArrow";
+import Spinner from "../spinner/Spinner";
 
 function Table() {
-  const [editModalVisible, setEditModalVisible] = useState<Boolean>(false);
   const [fruitToDeleteId, setFruitToDeleteId] = useState<string | null>(null);
+  const [fruitToEditId, setFruitToEditId] = useState<string | null>(null);
 
   const { fruits, getFruits } = useHarvest();
   const { dictionary } = useHarvest();
@@ -18,7 +19,11 @@ function Table() {
   const handleClickOnBin = (fruitId: string) => {
     setFruitToDeleteId(fruitId);
   };
-  const handleClickOnPencil = () => setEditModalVisible(true);
+
+  const handleClickOnPencil = (fruitId: string) => {
+    setFruitToEditId(fruitId);
+    console.log(fruitId);
+  };
 
   const index = Number(fruits.pagination.page);
   const canGetNextPage = index < Number(fruits.pagination.pages_total) - 1;
@@ -41,15 +46,7 @@ function Table() {
   return (
     <div>
       <div className="table-container">
-        {fruits.loading === true && (
-          <div className="is-loading">
-            <div className="loading-spinner">
-              <div className="spin">
-                <div></div>
-              </div>
-            </div>
-          </div>
-        )}
+        {fruits.loading === true && <Spinner />}
         <table>
           <thead>
             <tr className="header-row">
@@ -106,7 +103,7 @@ function Table() {
                       </div>
                       <div
                         className="icon"
-                        onClick={() => handleClickOnPencil()}
+                        onClick={() => handleClickOnPencil(fruit.id)}
                       >
                         <PencilIcon />
                       </div>
@@ -148,8 +145,11 @@ function Table() {
           fruitToDeleteId={fruitToDeleteId}
         />
       ) : null}
-      {editModalVisible ? (
-        <EditModal setEditModalVisible={setEditModalVisible} />
+      {fruitToEditId ? (
+        <EditModal
+          setFruitToEditId={setFruitToEditId}
+          fruitToEditId={fruitToEditId}
+        />
       ) : null}
     </div>
   );
