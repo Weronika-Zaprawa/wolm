@@ -1,0 +1,54 @@
+@use "../../../base.scss";
+.is-loading {
+  position: absolute;
+  top: calc(50% + 44px - 53px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 300; //ustawia wrapper nad rozmytym tłem
+  width: 100%;
+  height: calc(100% - 44px - 53px);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .spin div {
+    position: absolute;
+    animation: spin 1s linear infinite;
+    width: 80px;
+    height: 80px;
+    top: 10px;
+    left: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 0 0 base.$primary-600;
+    transform-origin: 40px 41px;
+  }
+  .loading-spinner {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    overflow: hidden;
+  }
+  .spin {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0; /* see note above */
+  }
+  .spin div {
+    box-sizing: content-box;
+  }
+}

@@ -11,6 +11,9 @@ type HarvestContextType = {
   getFruits(index: number): Promise<void>;
   deleteFruit(fruitId: string): Promise<void>;
   dictionary: DictionaryState;
+  fruit: ResponseFruitDetails;
+  setFruit: (fruit: ResponseFruitDetails) => void;
+  getFruitDetails(fruitId: string): Promise<void>;
 };
 
 type FruitsState = {
@@ -57,6 +60,10 @@ type ResponseDictionary = {
   data: DictionaryState;
 };
 
+type ResponseFruitDetails = {
+  data: Fruit[];
+};
+
 const HarvestContext = createContext<HarvestContextType | undefined>(undefined);
 
 export const HarvestProvider = ({ children }: { children: ReactElement }) => {
@@ -70,6 +77,10 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
     categories: [],
     freshnesses: [],
     weight_units: [],
+  });
+
+  const [fruit, setFruit] = useState<ResponseFruitDetails>({
+    data: [],
   });
 
   async function getFruits(index: number) {
@@ -91,6 +102,17 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
         return { ...prev, loading: false };
       });
       alert("Nie udało sie pobrać danych !");
+    }
+  }
+
+  async function getFruitDetails(fruitId: string) {
+    setFruit({ data: [] });
+    const response = await fetch(
+      `https://wolm.onrender.com/harvests/${fruitId}`
+    );
+    if (response.ok === true) {
+      const details: ResponseFruitDetails = await response.json();
+      setFruit({ data: details.data });
     }
   }
 
@@ -127,7 +149,15 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
 
   return (
     <HarvestContext.Provider
-      value={{ fruits, getFruits, deleteFruit, dictionary }}
+      value={{
+        fruits,
+        getFruits,
+        deleteFruit,
+        dictionary,
+        fruit,
+        setFruit,
+        getFruitDetails,
+      }}
     >
       {children}
     </HarvestContext.Provider>

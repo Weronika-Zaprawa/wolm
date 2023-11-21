@@ -1,16 +1,24 @@
 import Modal from "../modal/Modal";
 import HarvestForm from "../harvest-form/HarvestForm";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import PencilOnPaperIcon from "../../../images/icons/pencilOnPaper";
+import { useHarvest } from "../../services/HarvestContext";
+import Spinner from "../spinner/Spinner";
 
-function EditModal({
-  setEditModalVisible,
-}: {
-  setEditModalVisible: (visible: boolean) => void;
-}) {
+type EditModalProps = {
+  setFruitToEditId: (fruitId: string | null) => void;
+  fruitToEditId: string;
+};
+
+function EditModal({ setFruitToEditId, fruitToEditId }: EditModalProps) {
   const today = new Date();
   console.log(today.toISOString());
   const formRef = useRef<HTMLFormElement>(null);
+  const { fruit, setFruit, getFruitDetails, getFruits, fruits } = useHarvest();
+
+  useEffect(() => {
+    getFruitDetails(fruitToEditId);
+  }, []);
 
   return (
     <Modal
@@ -18,25 +26,40 @@ function EditModal({
       icon={<PencilOnPaperIcon />}
       paragraph={<>Zaktualizuj informacje o plonach</>}
       modalBody={
-        <HarvestForm
-          onSubmit={(values) =>
-            console.log(
-              "🐶✏️ tutaj ten od Edycji, dostałem takie wartości: ",
-              values
-            )
-          }
-          formRef={formRef}
-        />
+        fruit.data.length === 0 ? (
+          <div
+            style={{ height: "360px", position: "relative", width: "430px" }}
+          >
+            <Spinner />
+          </div>
+        ) : (
+          <HarvestForm
+            onSubmit={async (values) => {
+              await fetch(
+                `https://wolm.onrender.com/harvests/${fruitToEditId}`,
+                {
+                  method: "PUT",
+                  body: JSON.stringify(values),
+                  headers: { "Content-Type": "application/json" },
+                }
+              );
+              setFruitToEditId(null);
+              setFruit({ data: [] });
+              getFruits(fruits.pagination.page);
+            }}
+            formRef={formRef}
+          />
+        )
       }
       theme="functional"
       cancelButtonText="Anuluj"
       onCancelButtonClick={() => {
-        setEditModalVisible(false);
+        setFruit({ data: [] });
+        setFruitToEditId(null);
       }}
       actionButtonText="Edytuj"
       onActionButtonClick={() => {
         formRef.current?.requestSubmit();
-        setEditModalVisible(false);
       }}
     />
   );

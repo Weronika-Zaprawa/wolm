@@ -1,5 +1,4 @@
-import { RefObject } from "react";
-import { useState } from "react";
+import { RefObject, useMemo } from "react";
 import "./HarvestForm.scss";
 import { useHarvest } from "../../services/HarvestContext";
 import { useForm } from "react-hook-form";
@@ -23,7 +22,7 @@ type HarvestFormProps = {
 };
 
 function HarvestForm({ formRef, onSubmit }: HarvestFormProps) {
-  const { dictionary } = useHarvest();
+  const { dictionary, getFruitDetails, fruit } = useHarvest();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -49,6 +48,16 @@ function HarvestForm({ formRef, onSubmit }: HarvestFormProps) {
     formState: { errors },
   } = useForm<HarvestFormValues>({
     resolver: yupResolver(validationSchema),
+    defaultValues: {
+      name: fruit.data[0]?.name,
+      harvest_date: fruit.data[0]?.harvest_date,
+      variety: fruit.data[0]?.variety,
+      freshness: fruit.data[0]?.freshness,
+      category: fruit.data[0]?.category,
+      amount: fruit.data[0]?.amount.toString(),
+      amount_unit: fruit.data[0]?.amount_unit,
+      additional_information: fruit.data[0]?.additional_information,
+    },
   });
 
   return (
