@@ -26,7 +26,7 @@ function EditModal({ setFruitToEditId, fruitToEditId }: EditModalProps) {
       icon={<PencilOnPaperIcon />}
       paragraph={<>Zaktualizuj informacje o plonach</>}
       modalBody={
-        fruit.data.length === 0 ? (
+        fruit === undefined ? (
           <div
             style={{ height: "360px", position: "relative", width: "430px" }}
           >
@@ -44,7 +44,7 @@ function EditModal({ setFruitToEditId, fruitToEditId }: EditModalProps) {
                 }
               );
               setFruitToEditId(null);
-              setFruit({ data: [] });
+              setFruit(undefined);
               getFruits(fruits.pagination.page);
             }}
             formRef={formRef}
@@ -54,7 +54,7 @@ function EditModal({ setFruitToEditId, fruitToEditId }: EditModalProps) {
       theme="functional"
       cancelButtonText="Anuluj"
       onCancelButtonClick={() => {
-        setFruit({ data: [] });
+        setFruit(undefined);
         setFruitToEditId(null);
       }}
       actionButtonText="Edytuj"

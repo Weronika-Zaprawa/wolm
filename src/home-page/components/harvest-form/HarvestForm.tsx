@@ -49,14 +49,14 @@ function HarvestForm({ formRef, onSubmit }: HarvestFormProps) {
   } = useForm<HarvestFormValues>({
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      name: fruit.data[0]?.name,
-      harvest_date: fruit.data[0]?.harvest_date,
-      variety: fruit.data[0]?.variety,
-      freshness: fruit.data[0]?.freshness,
-      category: fruit.data[0]?.category,
-      amount: fruit.data[0]?.amount.toString(),
-      amount_unit: fruit.data[0]?.amount_unit,
-      additional_information: fruit.data[0]?.additional_information,
+      name: fruit?.name,
+      harvest_date: fruit?.harvest_date,
+      variety: fruit?.variety,
+      freshness: fruit?.freshness,
+      category: fruit?.category,
+      amount: fruit?.amount.toString(),
+      amount_unit: fruit?.amount_unit,
+      additional_information: fruit?.additional_information,
     },
   });
 
