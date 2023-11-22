@@ -22,7 +22,6 @@ function Table() {
 
   const handleClickOnPencil = (fruitId: string) => {
     setFruitToEditId(fruitId);
-    console.log(fruitId);
   };
 
   const index = Number(fruits.pagination.page);
@@ -40,8 +39,6 @@ function Table() {
       getFruits(index - 1);
     }
   }
-
-  console.log(dictionary);
 
   return (
     <div>

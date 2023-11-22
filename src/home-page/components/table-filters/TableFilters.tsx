@@ -2,7 +2,8 @@ import { useHarvest } from "../../services/HarvestContext";
 import "./TableFilters.scss";
 
 function TableFilters() {
-  const { getFruits, fruits } = useHarvest();
+  const { getFruits, fruits, searchFruitValue, setSearchFruitValue } =
+    useHarvest();
 
   return (
     <div className="table-filters-container">
@@ -11,6 +12,9 @@ function TableFilters() {
         <input
           className="custom-input"
           placeholder="Szukaj na podstawie nazwy"
+          type="text"
+          value={searchFruitValue}
+          onChange={(e) => setSearchFruitValue(e.target.value)}
         />
       </div>
       <div className="buttons-container">
