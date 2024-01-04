@@ -3,11 +3,11 @@ import "./Table.scss";
 import DeleteModal from "../delete-modal/DeleteModal";
 import EditModal from "../edit-modal/EditModal";
 import { useHarvest } from "../../services/HarvestContext";
-import BinIcon from "../../../images/icons/bin";
-import PencilIcon from "../../../images/icons/pencil";
-import LeftArrowIcon from "../../../images/icons/leftArrow";
-import RightArrowIcon from "../../../images/icons/rightArrow";
+import { PencilIcon } from "../../../images/icons";
+import { LeftArrowIcon } from "../../../images/icons";
+import { RightArrowIcon } from "../../../images/icons";
 import Spinner from "../spinner/Spinner";
+import { BinIcon } from "../../../images/icons";
 
 function Table() {
   const [fruitToDeleteId, setFruitToDeleteId] = useState<string | null>(null);

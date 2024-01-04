@@ -1,4 +1,4 @@
-import ExclamationMarkIcon from "../../../images/icons/exclamationMark";
+import { ExclamationMarkIcon } from "../../../images/icons";
 import { useHarvest } from "../../services/HarvestContext";
 import Modal from "../modal/Modal";
 

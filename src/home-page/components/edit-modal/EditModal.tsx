@@ -1,7 +1,7 @@
 import Modal from "../modal/Modal";
 import HarvestForm from "../harvest-form/HarvestForm";
 import { useRef, useEffect } from "react";
-import PencilOnPaperIcon from "../../../images/icons/pencilOnPaper";
+import { PencilOnPaperIcon } from "../../../images/icons";
 import { useHarvest } from "../../services/HarvestContext";
 import Spinner from "../spinner/Spinner";
 

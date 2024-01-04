@@ -1,20 +1,33 @@
+import { useCallback, useState } from "react";
 import { useHarvest } from "../../services/HarvestContext";
 import "./TableFilters.scss";
+import { debounce } from "lodash";
+import { MagnifierIcon } from "../../../images/icons";
 
 function TableFilters() {
-  const { getFruits, fruits, searchFruitValue, setSearchFruitValue } =
-    useHarvest();
+  const [nameFilterValue, setNameFilterValue] = useState<string>();
+  const { getFruits, fruits, setSearchFruitValue } = useHarvest();
+
+  const debouncedChange = useCallback(
+    debounce((e) => setSearchFruitValue(e.target.value), 700),
+    []
+  );
+
+  function handleNameFilterChange(e: React.ChangeEvent<HTMLInputElement>) {
+    debouncedChange(e);
+    setNameFilterValue(e.target.value);
+  }
 
   return (
     <div className="table-filters-container">
       <div className="custom-input-container">
-        🔍
+        <MagnifierIcon />
         <input
           className="custom-input"
-          placeholder="Szukaj na podstawie nazwy"
+          placeholder=" Szukaj na podstawie nazwy"
           type="text"
-          value={searchFruitValue}
-          onChange={(e) => setSearchFruitValue(e.target.value)}
+          value={nameFilterValue}
+          onChange={handleNameFilterChange}
         />
       </div>
       <div className="buttons-container">
@@ -26,7 +39,6 @@ function TableFilters() {
         >
           Odśwież
         </div>
-        <div className="secondary-button">🐕‍🦺 Filtruj</div>
       </div>
     </div>
   );

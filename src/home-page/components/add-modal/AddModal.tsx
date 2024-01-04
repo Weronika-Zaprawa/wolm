@@ -1,7 +1,7 @@
 import Modal from "../modal/Modal";
 import HarvestForm from "../harvest-form/HarvestForm";
 import { useRef, useState } from "react";
-import PlusIcon from "../../../images/icons/plus";
+import { PlusIcon } from "../../../images/icons";
 import { useHarvest } from "../../services/HarvestContext";
 
 function AddModal({
