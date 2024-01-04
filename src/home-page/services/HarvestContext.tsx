@@ -14,6 +14,8 @@ type HarvestContextType = {
   fruit: Fruit | undefined;
   setFruit: (fruit: Fruit | undefined) => void;
   getFruitDetails(fruitId: string): Promise<void>;
+  searchFruitValue: string;
+  setSearchFruitValue: (searchFruitValue: string) => void;
 };
 
 type FruitsState = {
@@ -81,12 +83,14 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
 
   const [fruit, setFruit] = useState<Fruit>();
 
+  const [searchFruitValue, setSearchFruitValue] = useState<string>("");
+
   async function getFruits(index: number) {
     setFruits((prev) => {
       return { ...prev, loading: true };
     });
     const response = await fetch(
-      `https://wolm.onrender.com/harvests?page=${index}&size=5&sort_by=amount&sort_order=asc`
+      `https://wolm.onrender.com/harvests?page=${index}&size=5&sort_by=amount&sort_order=asc&name=${searchFruitValue}`
     );
     if (response.ok === true) {
       const harvest: ResponseFruits = await response.json();
@@ -140,6 +144,10 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
   }, []);
 
   useEffect(() => {
+    getFruits(0);
+  }, [searchFruitValue]);
+
+  useEffect(() => {
     if (fruits.data.length === 0 && fruits.pagination.pages_total > 0) {
       getFruits(fruits.pagination.pages_total - 1);
     }
@@ -155,6 +163,8 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
         fruit,
         setFruit,
         getFruitDetails,
+        searchFruitValue,
+        setSearchFruitValue,
       }}
     >
       {children}
