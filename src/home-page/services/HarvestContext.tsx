@@ -16,6 +16,8 @@ type HarvestContextType = {
   getFruitDetails(fruitId: string): Promise<void>;
   searchFruitValue: string;
   setSearchFruitValue: (searchFruitValue: string) => void;
+  activeTabName: TabName;
+  setActiveTabName: (tabName: TabName) => void;
 };
 
 type FruitsState = {
@@ -66,6 +68,8 @@ type ResponseFruitDetails = {
   data: Fruit[];
 };
 
+type TabName = "fruits" | "vegetables";
+
 const HarvestContext = createContext<HarvestContextType | undefined>(undefined);
 
 export const HarvestProvider = ({ children }: { children: ReactElement }) => {
@@ -85,12 +89,14 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
 
   const [searchFruitValue, setSearchFruitValue] = useState<string>("");
 
+  const [activeTabName, setActiveTabName] = useState<TabName>("fruits");
+
   async function getFruits(index: number) {
     setFruits((prev) => {
       return { ...prev, loading: true };
     });
     const response = await fetch(
-      `https://wolm.onrender.com/harvests?page=${index}&size=5&sort_by=amount&sort_order=asc&name=${searchFruitValue}`
+      `https://wolm.onrender.com/harvests?page=${index}&size=5&sort_by=amount&sort_order=asc&name=${searchFruitValue}&category=${activeTabName}`
     );
     if (response.ok === true) {
       const harvest: ResponseFruits = await response.json();
@@ -145,7 +151,7 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
 
   useEffect(() => {
     getFruits(0);
-  }, [searchFruitValue]);
+  }, [searchFruitValue, activeTabName]);
 
   useEffect(() => {
     if (fruits.data.length === 0 && fruits.pagination.pages_total > 0) {
@@ -165,6 +171,8 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
         getFruitDetails,
         searchFruitValue,
         setSearchFruitValue,
+        activeTabName,
+        setActiveTabName,
       }}
     >
       {children}
