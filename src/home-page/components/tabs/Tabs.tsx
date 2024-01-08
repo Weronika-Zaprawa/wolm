@@ -1,18 +1,12 @@
 import { useState } from "react";
 import "./Tabs.scss";
+import { useHarvest } from "../../services/HarvestContext";
 
 type TabName = "fruits" | "vegetables";
 
 function Tabs() {
-  const [activeTabName, setActiveTabName] = useState<TabName>("fruits");
+  const { activeTabName, setActiveTabName, getFruits, fruits } = useHarvest();
 
-  // const handleTabClick = (tabName: TabName) => {
-  //   setActiveTabName(tabName);
-
-  //   if (activeTabName != tabName) {
-  //     console.log(tabName);
-  //   }
-  // };
   function handleTabClick(plants: TabName) {
     if (activeTabName != plants) {
       setActiveTabName(plants);
