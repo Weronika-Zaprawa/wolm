@@ -10,7 +10,7 @@ function TableFilters() {
   const { getFruits, fruits, setSearchFruitValue } = useHarvest();
 
   const debouncedChange = useCallback(
-    debounce((e) => setSearchFruitValue(e.target.value), 700),
+    debounce((e) => setSearchFruitValue(e.target.value.trim()), 700),
     []
   );
 
