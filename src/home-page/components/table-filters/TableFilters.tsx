@@ -3,6 +3,7 @@ import { useHarvest } from "../../services/HarvestContext";
 import "./TableFilters.scss";
 import { debounce } from "lodash";
 import { MagnifierIcon } from "../../../images/icons";
+import { XCircleIcon } from "../../../images/icons";
 
 function TableFilters() {
   const [nameFilterValue, setNameFilterValue] = useState<string>();
@@ -18,6 +19,11 @@ function TableFilters() {
     setNameFilterValue(e.target.value);
   }
 
+  function handleCancelIcon() {
+    setSearchFruitValue("");
+    setNameFilterValue("");
+  }
+
   return (
     <div className="table-filters-container">
       <div className="custom-input-container">
@@ -29,6 +35,16 @@ function TableFilters() {
           value={nameFilterValue}
           onChange={handleNameFilterChange}
         />
+        <div
+          className={
+            "cancel-icon " + (!nameFilterValue?.length ? "notVisible" : "")
+          }
+          onClick={() => {
+            handleCancelIcon();
+          }}
+        >
+          <XCircleIcon />
+        </div>
       </div>
       <div className="buttons-container">
         <div
