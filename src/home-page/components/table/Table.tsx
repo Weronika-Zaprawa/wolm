@@ -84,7 +84,17 @@ function Table() {
                         return <div className="pill">{data.name}</div>;
                       }
                     })} */}
-                    <div className="pill">
+                    <div
+                      className={
+                        "pill " +
+                        (fruit.freshness === "fresh"
+                          ? "fresh"
+                          : fruit.freshness === "withered"
+                          ? "widhered"
+                          : "")
+                      }
+                    >
+                      {"● "}
                       {dictionary.freshnesses.find(
                         (freshness) => freshness.key === fruit.freshness
                       )?.name ?? "Nieznany"}
