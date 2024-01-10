@@ -17,7 +17,7 @@ function TopBar() {
       </div>
       <div className="top-bar-right-side">
         <div className="primary-button" onClick={() => handleClickOnAdd()}>
-          + Dodaj
+          Dodaj
         </div>
       </div>
       {addModalVisible ? (

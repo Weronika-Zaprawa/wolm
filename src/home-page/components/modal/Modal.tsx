@@ -33,7 +33,7 @@ function Modal({
           <div className="modal-icon">{icon}</div>
           <div className="modal-header">{header}</div>
           <div className="modal-text">{paragraph}</div>
-          <div>{modalBody}</div>
+          {modalBody}
         </div>
         <div className="modal-buttons-wrapper">
           <div className="cancel-button" onClick={onCancelButtonClick}>
