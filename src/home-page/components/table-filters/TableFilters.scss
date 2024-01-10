@@ -39,6 +39,20 @@
     justify-content: space-between;
     gap: 8px;
 
+    .primary-button {
+      background-color: base.$primary-600;
+      color: base.$white;
+      padding: 10px 26px;
+      gap: 8px;
+      border-radius: 8px;
+      border: 1px solid base.$primary-600;
+      box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+    }
+
     .secondary-button {
       color: base.$gray-700;
       display: flex;
