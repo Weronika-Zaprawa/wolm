@@ -16,6 +16,8 @@
   box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.06),
     0px 1px 3px 0px rgba(16, 24, 40, 0.1);
 
+  overflow: auto;
+
   table {
     width: 100%;
     background: base.$white;
@@ -144,6 +146,9 @@
     align-self: stretch;
 
     border-top: 1px solid base.$gray-200;
+    position: sticky;
+    top: 0;
+    left: 0;
 
     .page-number {
       color: base.$gray-700;

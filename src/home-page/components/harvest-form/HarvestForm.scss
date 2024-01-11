@@ -1,81 +1,111 @@
 @use "../../../base.scss";
 
 $row-gap: 16px;
-.row {
-  display: flex;
-  align-items: flex-start;
-  gap: $row-gap;
-  align-self: stretch;
-  margin-bottom: 16px;
 
-  .cell {
+form {
+  @media screen and (max-width: 550px) {
+    width: 100%;
+  }
+  .row {
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
+    gap: $row-gap;
     align-self: stretch;
-  }
+    margin-bottom: 16px;
 
-  label {
-    color: base.$gray-700;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
-  }
-  input {
-    display: flex;
-    padding: 10px 14px;
-    align-items: center;
-    align-self: stretch;
-    border-radius: 8px;
-    border: 1px solid base.$gray-300;
-    background: base.$white;
-
-    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-
-    &.is-invalid {
-      border-style: solid;
-      border-width: 1px;
-      border-color: red;
+    @media screen and (max-width: 550px) {
+      flex-direction: column;
     }
-  }
-  select {
-    display: flex;
-    padding: 10px 14px;
-    align-items: center;
-    align-self: stretch;
-    border-radius: 8px;
-    border: 1px solid base.$gray-300;
-    background: base.$white;
 
-    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-
-    &.is-invalid {
-      border-style: solid;
-      border-width: 1px;
-      border-color: red;
+    .cell {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      align-self: stretch;
     }
-  }
 
-  .extra-small {
-    width: calc(25% - $row-gap);
-  }
+    label {
+      color: base.$gray-700;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+    }
+    input {
+      display: flex;
+      padding: 10px 14px;
+      align-items: center;
+      align-self: stretch;
+      border-radius: 8px;
+      border: 1px solid base.$gray-300;
+      background: base.$white;
 
-  .small {
-    width: calc(30% - $row-gap);
-  }
+      box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 
-  .medium {
-    width: calc(45% - $row-gap);
-  }
+      &.is-invalid {
+        border-style: solid;
+        border-width: 1px;
+        border-color: red;
+      }
+    }
+    select {
+      display: flex;
+      padding: 10px 14px;
+      align-items: center;
+      align-self: stretch;
+      border-radius: 8px;
+      border: 1px solid base.$gray-300;
+      background: base.$white;
 
-  .large {
-    width: calc(70% - $row-gap);
-  }
+      box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 
-  .extra-large {
-    width: calc(100% - $row-gap);
+      &.is-invalid {
+        border-style: solid;
+        border-width: 1px;
+        border-color: red;
+      }
+    }
+
+    .extra-small {
+      width: calc(25% - $row-gap);
+
+      @media screen and (max-width: 550px) {
+        width: calc(100% - $row-gap);
+      }
+    }
+
+    .small {
+      width: calc(30% - $row-gap);
+
+      @media screen and (max-width: 550px) {
+        width: calc(100% - $row-gap);
+      }
+    }
+
+    .medium {
+      width: calc(45% - $row-gap);
+
+      @media screen and (max-width: 550px) {
+        width: calc(100% - $row-gap);
+      }
+    }
+
+    .large {
+      width: calc(70% - $row-gap);
+
+      @media screen and (max-width: 550px) {
+        width: calc(100% - $row-gap);
+      }
+    }
+
+    .extra-large {
+      width: calc(100% - $row-gap);
+
+      @media screen and (max-width: 550px) {
+        width: calc(100% - $row-gap);
+      }
+    }
   }
 }
 

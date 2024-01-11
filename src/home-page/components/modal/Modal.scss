@@ -10,7 +10,9 @@ $background-color: base.$error-100;
   z-index: 300; //ustawia wrapper nad rozmytym tłem
 
   display: flex;
-  width: 430px;
+  max-width: 430px;
+
+  width: 75vw;
   padding: 24px;
   flex-direction: column;
   align-items: center;
@@ -22,45 +24,51 @@ $background-color: base.$error-100;
   box-shadow: 0px 8px 8px -4px rgba(16, 24, 40, 0.03),
     0px 20px 24px -4px rgba(16, 24, 40, 0.08);
 
-  .modal-content-wrapper {
+  @media screen and (max-width: 550px) {
+    max-height: 550px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
+
+.modal-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  align-self: stretch;
+
+  .modal-icon {
     display: flex;
-    flex-direction: column;
+    width: 24px;
+    height: 24px;
+    padding: 12px;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
+
+    border-radius: 50%;
+    border: 8px solid base.$error-50;
+    background: $background-color;
+  }
+  .modal-header {
     align-self: stretch;
 
-    .modal-icon {
-      display: flex;
-      width: 24px;
-      height: 24px;
-      padding: 12px;
-      justify-content: center;
-      align-items: center;
+    color: base.$gray-900;
+    text-align: center;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+  }
+  .modal-text {
+    align-self: stretch;
 
-      border-radius: 50%;
-      border: 8px solid base.$error-50;
-      background: $background-color;
-    }
-    .modal-header {
-      align-self: stretch;
-
-      color: base.$gray-900;
-      text-align: center;
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 28px;
-    }
-    .modal-text {
-      align-self: stretch;
-
-      color: base.$gray-500;
-      text-align: center;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 20px;
-    }
+    color: base.$gray-500;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
   }
 }
 
@@ -69,6 +77,8 @@ $background-color: base.$error-100;
   align-items: flex-start;
   gap: 12px;
   align-self: stretch;
+
+  flex-wrap: wrap;
 
   .cancel-button {
     color: base.$gray-700;
@@ -82,6 +92,7 @@ $background-color: base.$error-100;
     align-items: center;
     gap: 8px;
     flex: 1 0 0;
+    min-width: 90px;
 
     border-radius: 8px;
     border: 1px solid base.$gray-300;
@@ -103,6 +114,7 @@ $background-color: base.$error-100;
     align-items: center;
     gap: 8px;
     flex: 1 0 0;
+    min-width: 90px;
     border-radius: 8px;
     border: 1px solid base.$error-600;
     background: base.$error-600;
