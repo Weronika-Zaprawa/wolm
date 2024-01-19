@@ -2,115 +2,117 @@
 
 $row-gap: 16px;
 
-form {
-  @media screen and (max-width: 550px) {
-    width: 100%;
-  }
-  .row {
-    display: flex;
-    align-items: flex-start;
-    gap: $row-gap;
-    align-self: stretch;
-    margin-bottom: 16px;
-
+.harvest-form-wrapper {
+  form {
     @media screen and (max-width: 550px) {
-      flex-direction: column;
+      width: 100%;
     }
-
-    .cell {
+    .row {
       display: flex;
-      flex-direction: column;
       align-items: flex-start;
-      gap: 6px;
+      gap: $row-gap;
       align-self: stretch;
-    }
-
-    label {
-      color: base.$gray-700;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 20px;
-    }
-    input {
-      display: flex;
-      padding: 10px 14px;
-      align-items: center;
-      align-self: stretch;
-      border-radius: 8px;
-      border: 1px solid base.$gray-300;
-      background: base.$white;
-
-      box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-
-      &.is-invalid {
-        border-style: solid;
-        border-width: 1px;
-        border-color: red;
-      }
-    }
-    select {
-      display: flex;
-      padding: 10px 14px;
-      align-items: center;
-      align-self: stretch;
-      border-radius: 8px;
-      border: 1px solid base.$gray-300;
-      background: base.$white;
-
-      box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-
-      &.is-invalid {
-        border-style: solid;
-        border-width: 1px;
-        border-color: red;
-      }
-    }
-
-    .extra-small {
-      width: calc(25% - $row-gap);
+      margin-bottom: 16px;
 
       @media screen and (max-width: 550px) {
-        width: calc(100% - $row-gap);
+        flex-direction: column;
       }
-    }
 
-    .small {
-      width: calc(30% - $row-gap);
-
-      @media screen and (max-width: 550px) {
-        width: calc(100% - $row-gap);
+      .cell {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        align-self: stretch;
       }
-    }
 
-    .medium {
-      width: calc(45% - $row-gap);
-
-      @media screen and (max-width: 550px) {
-        width: calc(100% - $row-gap);
+      label {
+        color: base.$gray-700;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
       }
-    }
+      input {
+        display: flex;
+        padding: 10px 14px;
+        align-items: center;
+        align-self: stretch;
+        border-radius: 8px;
+        border: 1px solid base.$gray-300;
+        background: base.$white;
 
-    .large {
-      width: calc(70% - $row-gap);
+        box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 
-      @media screen and (max-width: 550px) {
-        width: calc(100% - $row-gap);
+        &.is-invalid {
+          border-style: solid;
+          border-width: 1px;
+          border-color: red;
+        }
       }
-    }
+      select {
+        display: flex;
+        padding: 10px 14px;
+        align-items: center;
+        align-self: stretch;
+        border-radius: 8px;
+        border: 1px solid base.$gray-300;
+        background: base.$white;
 
-    .extra-large {
-      width: calc(100% - $row-gap);
+        box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 
-      @media screen and (max-width: 550px) {
+        &.is-invalid {
+          border-style: solid;
+          border-width: 1px;
+          border-color: red;
+        }
+      }
+
+      .extra-small {
+        width: calc(25% - $row-gap);
+
+        @media screen and (max-width: 550px) {
+          width: calc(100% - $row-gap);
+        }
+      }
+
+      .small {
+        width: calc(30% - $row-gap);
+
+        @media screen and (max-width: 550px) {
+          width: calc(100% - $row-gap);
+        }
+      }
+
+      .medium {
+        width: calc(45% - $row-gap);
+
+        @media screen and (max-width: 550px) {
+          width: calc(100% - $row-gap);
+        }
+      }
+
+      .large {
+        width: calc(70% - $row-gap);
+
+        @media screen and (max-width: 550px) {
+          width: calc(100% - $row-gap);
+        }
+      }
+
+      .extra-large {
         width: calc(100% - $row-gap);
+
+        @media screen and (max-width: 550px) {
+          width: calc(100% - $row-gap);
+        }
       }
     }
   }
-}
 
-.invalid-feedback {
-  padding: 2px;
-  color: red;
-  font-size: small;
+  .invalid-feedback {
+    padding: 2px;
+    color: red;
+    font-size: small;
+  }
 }

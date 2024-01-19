@@ -11,12 +11,17 @@
     flex-direction: column;
 
     .top-bar-left-side-upper {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
       span {
         color: base.$gray-900;
         font-size: 30px;
         font-style: normal;
         font-weight: 500;
         line-height: 38px;
+      }
+      button {
       }
     }
 

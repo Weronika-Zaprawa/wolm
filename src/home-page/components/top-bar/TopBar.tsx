@@ -1,7 +1,9 @@
 import { useState } from "react";
 import "./TopBar.scss";
+import { useAuth } from "../../services/AuthContext";
 
 function TopBar() {
+  const { deleteToken } = useAuth();
   return (
     <div className="top-bar">
       <div className="top-bar-left-side">
@@ -11,6 +13,15 @@ function TopBar() {
         <div className="top-bar-left-side-lower">
           <span>Kontroluj stan zebranych plonów</span>
         </div>
+      </div>
+      <div className="top-bar-right-side">
+        <button
+          onClick={() => {
+            deleteToken();
+          }}
+        >
+          Wyloguj się
+        </button>
       </div>
     </div>
   );

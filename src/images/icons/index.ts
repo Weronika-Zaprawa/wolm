@@ -7,3 +7,7 @@ export{ReactComponent as PencilOnPaperIcon} from "./pencilOnPaper.svg";
 export{ReactComponent as PlusIcon} from "./plus.svg";
 export{ReactComponent as RightArrowIcon} from "./rightArrow.svg";
 export{ReactComponent as XCircleIcon} from "./XCircle.svg";
+export{ReactComponent as PersonIcon} from "./person.svg";
+export{ReactComponent as LockIcon} from "./lock.svg";
+export{ReactComponent as EyeIcon} from "./eye.svg";
+export{ReactComponent as EyeSlashIcon} from "./eyeSlash.svg";
