@@ -16,6 +16,7 @@ function TopBar() {
       </div>
       <div className="top-bar-right-side">
         <button
+          className="logout-button"
           onClick={() => {
             deleteToken();
           }}

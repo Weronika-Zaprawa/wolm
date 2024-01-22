@@ -24,8 +24,8 @@ function LoginPage() {
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Błędy format email")
-      .required("Email jest wymagany"),
-    password: Yup.string().required("Hasło jest wymagane"),
+      .required("Email jest wymagany!"),
+    password: Yup.string().required("Hasło jest wymagane!"),
   });
 
   const {
@@ -69,7 +69,7 @@ function LoginPage() {
                 className={"input-username"}
               ></input>
             </div>
-            <div>{errors.email?.message}</div>
+            <div className="error-message">{errors.email?.message}</div>
           </div>
           <div className="row">
             <label htmlFor="password">Hasło</label>
@@ -103,11 +103,12 @@ function LoginPage() {
                 {showPassword ? <EyeIcon /> : <EyeSlashIcon />}
               </div>
             </div>
-            <div>{errors.password?.message}</div>
+            <div className="error-message">{errors.password?.message}</div>
           </div>
           <button className="button">
             <span>ZALOGUJ SIĘ</span>
           </button>
+          <button className="register-button">Utwórz nowe konto </button>
         </form>
       </div>
     </div>
