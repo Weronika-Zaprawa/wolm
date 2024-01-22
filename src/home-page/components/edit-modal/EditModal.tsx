@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import { PencilOnPaperIcon } from "../../../images/icons";
 import { useHarvest } from "../../services/HarvestContext";
 import Spinner from "../spinner/Spinner";
+import { LOCAL_TOKEN_KEY } from "../../services/AuthContext";
 
 type EditModalProps = {
   setFruitToEditId: (fruitId: string | null) => void;
@@ -40,7 +41,10 @@ function EditModal({ setFruitToEditId, fruitToEditId }: EditModalProps) {
                 {
                   method: "PUT",
                   body: JSON.stringify(values),
-                  headers: { "Content-Type": "application/json" },
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: localStorage.getItem(LOCAL_TOKEN_KEY) ?? "",
+                  },
                 }
               );
               setFruitToEditId(null);

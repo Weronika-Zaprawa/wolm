@@ -1,0 +1,197 @@
+@use "../../../base.scss";
+
+.login-page-wrapper {
+  background: rgb(107, 217, 237);
+  background: linear-gradient(
+    125deg,
+    rgba(107, 217, 237, 1) 0%,
+    rgba(149, 84, 190, 1) 35%,
+    rgba(127, 86, 217, 1) 100%
+  );
+
+  width: 100vw;
+  height: 100vh;
+  .login-modal {
+    position: absolute;
+    top: 50%; // ustawianie wrappera na środku strony (4 pierwsze linie)
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    max-width: 430px;
+    max-height: 420px;
+
+    width: 75vw;
+    height: 60vh;
+    padding: 24px;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+
+    border-radius: 12px;
+    background: base.$white;
+    box-shadow: 0px 0px 15px -8px rgba(0, 0, 0, 1);
+    .header {
+      color: base.$gray-900;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 28px;
+      margin-top: 40px;
+      margin-bottom: 0px;
+    }
+    .login-form {
+      width: 80%;
+      flex-direction: column;
+      display: flex;
+      align-items: center;
+      margin: auto;
+
+      .row {
+        display: flex;
+        flex-direction: column;
+
+        gap: 6px;
+        align-self: stretch;
+        margin-bottom: 16px;
+
+        label {
+          color: base.$gray-700;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 20px;
+        }
+        .input-username-container {
+          display: flex;
+          align-items: center;
+          border-bottom: 2px solid base.$gray-300;
+          border-top: 0px;
+          border-left: 0px;
+          border-right: 0px;
+          color: gray;
+
+          input:-webkit-autofill {
+            border: 0px;
+            -webkit-box-shadow: 0 0 0px 1000px white inset;
+          }
+
+          .input-username {
+            width: 100%;
+            display: flex;
+            padding: 10px 14px;
+            align-items: center;
+            align-self: stretch;
+            outline: none;
+            border: 0px;
+          }
+        }
+        .error-message {
+          padding: 2px;
+          color: red;
+          font-size: small;
+        }
+        .input-password-container {
+          display: flex;
+          align-items: center;
+          border-bottom: 2px solid base.$gray-300;
+          border-top: 0px;
+          border-left: 0px;
+          border-right: 0px;
+          color: gray;
+          .input-password {
+            width: 100%;
+            display: flex;
+            padding: 10px 14px;
+            align-items: center;
+            align-self: stretch;
+            outline: none;
+            border: 0px;
+          }
+          .display-password {
+            height: 20px;
+            width: 20px;
+            cursor: pointer;
+
+            &.disabled {
+              visibility: hidden;
+            }
+          }
+        }
+      }
+      .button {
+        margin-top: 20px;
+        width: 90%;
+        font-size: 14px;
+        font-weight: 300;
+        color: base.$white;
+        display: flex;
+        padding: 10px 18px;
+        justify-content: center;
+        min-width: 90px;
+        border-radius: 50px;
+        border: 0px;
+        cursor: pointer;
+        background: rgb(107, 217, 237);
+        background: linear-gradient(
+          125deg,
+          rgba(107, 217, 237, 1) 0%,
+          rgba(149, 84, 190, 1) 35%,
+          rgba(127, 86, 217, 1) 100%
+        );
+
+        user-select: none;
+
+        box-shadow: 0px;
+        text-shadow: 0px;
+        transition: box-shadow 0.1s, text-shadow 0.1s, transform 0.1s,
+          font-weight 0.1s;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          border-radius: 50px;
+
+          bottom: 0px;
+          left: 0%;
+          width: 10%;
+          height: 100%;
+          opacity: 0;
+          background: linear-gradient(
+            125deg,
+            rgba(253, 253, 253, 0.7) 0%,
+            rgba(74, 255, 246, 0.394) 35%,
+            rgba(227, 79, 247, 0.324) 100%
+          );
+
+          transition: opacity ease-in-out 0.6s, width ease-in-out 0.6s;
+        }
+
+        &:active {
+          box-shadow: inset 0px 0px 37p x 4px rgba(66, 68, 90, 0.5);
+          // text-shadow: -1px 0px 8px rgba(251, 122, 183, 1);
+          transform: scale(0.98);
+
+          &::after {
+            opacity: 0.8;
+            width: 100%;
+
+            transition: opacity ease-in-out 0.05s, width ease-in-out 0.05s;
+          }
+        }
+
+        span {
+          z-index: 999;
+        }
+      }
+      .register-button {
+        margin-top: 25px;
+        border: 0px;
+        background-color: white;
+        color: rgba(127, 86, 217, 1);
+        font-size: 15px;
+        cursor: pointer;
+      }
+    }
+  }
+}

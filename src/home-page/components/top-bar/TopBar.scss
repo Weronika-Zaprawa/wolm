@@ -11,6 +11,9 @@
     flex-direction: column;
 
     .top-bar-left-side-upper {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
       span {
         color: base.$gray-900;
         font-size: 30px;
@@ -27,6 +30,27 @@
         font-style: normal;
         font-weight: 400;
         line-height: 24px;
+      }
+    }
+  }
+  .top-bar-right-side {
+    .logout-button {
+      font-weight: 300;
+      color: base.$white;
+      padding: 10px 18px;
+      min-width: 40;
+      border-radius: 8px;
+      border: 0px;
+      cursor: pointer;
+      background: rgb(107, 217, 237);
+      background: linear-gradient(
+        125deg,
+        rgba(107, 217, 237, 1) 0%,
+        rgba(149, 84, 190, 1) 35%,
+        rgba(127, 86, 217, 1) 100%
+      );
+      &:hover {
+        background: base.$primary-600;
       }
     }
   }

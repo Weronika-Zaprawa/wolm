@@ -60,7 +60,7 @@ function Table() {
               <tr className="BBC">
                 {!fruits.loading && (
                   <td colSpan={8}>
-                    <h2>Brak dodanych owoców</h2>
+                    <h2>Brak dodanych plonów z wybranej kategorii</h2>
                   </td>
                 )}
               </tr>

@@ -3,6 +3,7 @@ import HarvestForm from "../harvest-form/HarvestForm";
 import { useRef, useState } from "react";
 import { PlusIcon } from "../../../images/icons";
 import { useHarvest } from "../../services/HarvestContext";
+import { LOCAL_TOKEN_KEY } from "../../services/AuthContext";
 
 function AddModal({
   setAddModalVisible,
@@ -27,7 +28,10 @@ function AddModal({
             await fetch(`https://wolm.onrender.com/harvests`, {
               method: "POST",
               body: JSON.stringify(values),
-              headers: { "Content-Type": "application/json" },
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: localStorage.getItem(LOCAL_TOKEN_KEY) ?? "",
+              },
             });
 
             setAddModalVisible(false);

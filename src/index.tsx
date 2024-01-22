@@ -1,9 +1,21 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
-import HomePage from "./home-page/HomePage";
+
+import App from "./App";
+import { AuthProvider } from "./home-page/services/AuthContext";
+import LoginPage from "./home-page/components/login-page/LoginPage";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-root.render(<HomePage />);
+root.render(
+  <AuthProvider>
+    <App />
+  </AuthProvider>
+);
+
+// root.render(
+//   <AuthProvider>
+//     <LoginPage />
+//   </AuthProvider>
+// );
