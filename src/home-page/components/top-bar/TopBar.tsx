@@ -3,7 +3,7 @@ import "./TopBar.scss";
 import { useAuth } from "../../services/AuthContext";
 
 function TopBar() {
-  const { deleteToken } = useAuth();
+  const { deleteTokens } = useAuth();
   return (
     <div className="top-bar">
       <div className="top-bar-left-side">
@@ -18,7 +18,7 @@ function TopBar() {
         <button
           className="logout-button"
           onClick={() => {
-            deleteToken();
+            deleteTokens();
           }}
         >
           Wyloguj się

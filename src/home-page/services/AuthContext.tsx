@@ -1,32 +1,46 @@
 import { ReactElement, createContext, useContext, useState } from "react";
 
 type AuthContextType = {
-  token: string | null;
-  saveToken: (token: string) => void;
-  deleteToken: () => void;
+  accessToken: string | null;
+  refreshToken: string | null;
+  saveTokens: (accessToken: string, refreshToken: string) => void;
+  deleteTokens: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const LOCAL_TOKEN_KEY = "token";
+export const LOCAL_ACCESS_TOKEN_KEY = "accessToken";
+export const LOCAL_REFRESH_TOKEN_KEY = "refreshToken";
 
 export const AuthProvider = ({ children }: { children: ReactElement }) => {
-  const [token, setToken] = useState<string | null>(
-    localStorage.getItem(LOCAL_TOKEN_KEY)
+  const [accessToken, setAccessToken] = useState<string | null>(
+    localStorage.getItem(LOCAL_ACCESS_TOKEN_KEY)
   );
 
-  const saveToken = (token: string) => {
-    localStorage.setItem(LOCAL_TOKEN_KEY, token);
-    setToken(token);
+  const [refreshToken, setRefreshToken] = useState<string | null>(
+    localStorage.getItem(LOCAL_REFRESH_TOKEN_KEY)
+  );
+
+  const saveTokens = (accessToken: string, refreshToken: string) => {
+    localStorage.setItem(LOCAL_ACCESS_TOKEN_KEY, accessToken);
+    setAccessToken(accessToken);
+
+    localStorage.setItem(LOCAL_REFRESH_TOKEN_KEY, refreshToken);
+    setRefreshToken(refreshToken);
   };
 
-  const deleteToken = () => {
-    localStorage.removeItem(LOCAL_TOKEN_KEY);
-    setToken(null);
+  const deleteTokens = () => {
+    localStorage.removeItem(LOCAL_ACCESS_TOKEN_KEY);
+    setAccessToken(null);
+
+    localStorage.removeItem(LOCAL_REFRESH_TOKEN_KEY);
+    setRefreshToken(null);
   };
 
   return (
-    <AuthContext.Provider value={{ token, saveToken, deleteToken }}>
+    <AuthContext.Provider
+      value={{ accessToken, refreshToken, saveTokens, deleteTokens }}
+    >
       {children}
     </AuthContext.Provider>
   );

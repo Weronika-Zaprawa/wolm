@@ -5,7 +5,7 @@ import {
   useState,
   useEffect,
 } from "react";
-import { LOCAL_TOKEN_KEY } from "./AuthContext";
+import { LOCAL_ACCESS_TOKEN_KEY } from "./AuthContext";
 
 type HarvestContextType = {
   fruits: FruitsState;
@@ -101,7 +101,7 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage.getItem(LOCAL_TOKEN_KEY) ?? "",
+          Authorization: localStorage.getItem(LOCAL_ACCESS_TOKEN_KEY) ?? "",
         },
       }
     );
@@ -127,7 +127,7 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage.getItem(LOCAL_TOKEN_KEY) ?? "",
+          Authorization: localStorage.getItem(LOCAL_ACCESS_TOKEN_KEY) ?? "",
         },
       }
     );
@@ -142,7 +142,7 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem(LOCAL_TOKEN_KEY) ?? "",
+        Authorization: localStorage.getItem(LOCAL_ACCESS_TOKEN_KEY) ?? "",
       },
     });
 
@@ -155,7 +155,7 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage.getItem(LOCAL_TOKEN_KEY) ?? "",
+          Authorization: localStorage.getItem(LOCAL_ACCESS_TOKEN_KEY) ?? "",
         },
       }
     );

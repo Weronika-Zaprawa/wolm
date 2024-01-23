@@ -3,7 +3,7 @@ import "./index.scss";
 
 import App from "./App";
 import { AuthProvider } from "./home-page/services/AuthContext";
-import LoginPage from "./home-page/components/login-page/LoginPage";
+import LoginPage from "./authentication/LoginPage";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

@@ -3,7 +3,7 @@ import HarvestForm from "../harvest-form/HarvestForm";
 import { useRef, useState } from "react";
 import { PlusIcon } from "../../../images/icons";
 import { useHarvest } from "../../services/HarvestContext";
-import { LOCAL_TOKEN_KEY } from "../../services/AuthContext";
+import { LOCAL_ACCESS_TOKEN_KEY } from "../../services/AuthContext";
 
 function AddModal({
   setAddModalVisible,
@@ -30,7 +30,8 @@ function AddModal({
               body: JSON.stringify(values),
               headers: {
                 "Content-Type": "application/json",
-                Authorization: localStorage.getItem(LOCAL_TOKEN_KEY) ?? "",
+                Authorization:
+                  localStorage.getItem(LOCAL_ACCESS_TOKEN_KEY) ?? "",
               },
             });
 
