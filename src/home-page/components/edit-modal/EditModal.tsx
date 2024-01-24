@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 import { PencilOnPaperIcon } from "../../../images/icons";
 import { useHarvest } from "../../services/HarvestContext";
 import Spinner from "../spinner/Spinner";
-import { LOCAL_ACCESS_TOKEN_KEY } from "../../services/AuthContext";
+import { LOCAL_ACCESS_TOKEN_KEY, useAuth } from "../../services/AuthContext";
 
 type EditModalProps = {
   setFruitToEditId: (fruitId: string | null) => void;
@@ -15,7 +15,9 @@ function EditModal({ setFruitToEditId, fruitToEditId }: EditModalProps) {
   const today = new Date();
   console.log(today.toISOString());
   const formRef = useRef<HTMLFormElement>(null);
+
   const { fruit, setFruit, getFruitDetails, getFruits, fruits } = useHarvest();
+  const { handleFetch } = useAuth();
 
   useEffect(() => {
     getFruitDetails(fruitToEditId);
@@ -36,16 +38,11 @@ function EditModal({ setFruitToEditId, fruitToEditId }: EditModalProps) {
         ) : (
           <HarvestForm
             onSubmit={async (values) => {
-              await fetch(
+              await handleFetch(
                 `https://wolm.onrender.com/harvests/${fruitToEditId}`,
                 {
                   method: "PUT",
                   body: JSON.stringify(values),
-                  headers: {
-                    "Content-Type": "application/json",
-                    Authorization:
-                      localStorage.getItem(LOCAL_ACCESS_TOKEN_KEY) ?? "",
-                  },
                 }
               );
               setFruitToEditId(null);

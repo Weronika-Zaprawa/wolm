@@ -5,7 +5,7 @@ import {
   useState,
   useEffect,
 } from "react";
-import { LOCAL_ACCESS_TOKEN_KEY } from "./AuthContext";
+import { LOCAL_ACCESS_TOKEN_KEY, useAuth } from "./AuthContext";
 
 type HarvestContextType = {
   fruits: FruitsState;
@@ -74,6 +74,8 @@ type TabName = "fruits" | "vegetables";
 const HarvestContext = createContext<HarvestContextType | undefined>(undefined);
 
 export const HarvestProvider = ({ children }: { children: ReactElement }) => {
+  const { handleFetch } = useAuth();
+
   const [fruits, setFruits] = useState<FruitsState>({
     data: [],
     pagination: { page: 0, size: 10, items_total: 0, pages_total: 0 },
@@ -96,15 +98,11 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
     setFruits((prev) => {
       return { ...prev, loading: true };
     });
-    const response = await fetch(
+    const response = await handleFetch(
       `https://wolm.onrender.com/harvests?page=${index}&size=5&sort_by=amount&sort_order=asc&name=${searchFruitValue}&category=${activeTabName}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem(LOCAL_ACCESS_TOKEN_KEY) ?? "",
-        },
-      }
+      {}
     );
+
     if (response.ok === true) {
       const harvest: ResponseFruits = await response.json();
       setFruits({
@@ -122,15 +120,11 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
 
   async function getFruitDetails(fruitId: string) {
     setFruit(undefined);
-    const response = await fetch(
+    const response = await handleFetch(
       `https://wolm.onrender.com/harvests/${fruitId}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem(LOCAL_ACCESS_TOKEN_KEY) ?? "",
-        },
-      }
+      {}
     );
+
     if (response.ok === true) {
       const details: ResponseFruitDetails = await response.json();
       setFruit(details.data[0]);
@@ -138,26 +132,16 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
   }
 
   async function deleteFruit(fruitId: string) {
-    await fetch(`https://wolm.onrender.com/harvests/${fruitId}`, {
+    await handleFetch(`https://wolm.onrender.com/harvests/${fruitId}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: localStorage.getItem(LOCAL_ACCESS_TOKEN_KEY) ?? "",
-      },
     });
-
     return;
   }
 
   async function getDictionary() {
-    const responseDictionary = await fetch(
+    const responseDictionary = await handleFetch(
       `https://wolm.onrender.com/harvests-dictionary`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem(LOCAL_ACCESS_TOKEN_KEY) ?? "",
-        },
-      }
+      {}
     );
     const dictionary: ResponseDictionary = await responseDictionary.json();
     setDictionary({

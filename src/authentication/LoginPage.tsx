@@ -11,18 +11,13 @@ import { useAuth } from "../home-page/services/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { AUTH_ROUTE_PATHS } from "./AuthRoutes";
 
-type LoginFormValues = {
+export type LoginFormValues = {
   email: string;
   password: string;
 };
 
-type LoginResponse = {
-  access_token: string;
-  refresh_token: string;
-};
-
 function LoginPage() {
-  const { saveTokens } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -41,29 +36,18 @@ function LoginPage() {
     formState: { errors },
   } = useForm<LoginFormValues>({ resolver: yupResolver(validationSchema) });
 
-  async function login(values: LoginFormValues) {
+  async function handleLogin(values: LoginFormValues) {
     setLoading(true);
     values.email = values.email.trim();
-    const response = await fetch(`https://wolm.onrender.com/login`, {
-      method: "POST",
-      body: JSON.stringify(values),
-      headers: { "Content-Type": "application/json" },
-    });
+    await login(values);
     setLoading(false);
-
-    if (!response.ok) {
-      alert("Podano błędny email lub hasło");
-    } else {
-      const token: LoginResponse = await response.json();
-      saveTokens(token.access_token, token.refresh_token);
-    }
   }
 
   return (
     <div className="page-wrapper">
       <div className="modal">
         <div className="header">Zaloguj się</div>
-        <form onSubmit={handleSubmit(login)} className="form">
+        <form onSubmit={handleSubmit(handleLogin)} className="form">
           <div className="row">
             <label htmlFor="email">Email</label>
             <div className="input-username-container">

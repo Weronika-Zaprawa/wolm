@@ -5,8 +5,11 @@ import { debounce } from "lodash";
 import { MagnifierIcon } from "../../../images/icons";
 import { XCircleIcon } from "../../../images/icons";
 import AddModal from "../add-modal/AddModal";
+import { useAuth } from "../../services/AuthContext";
 
 function TableFilters() {
+  const { handleRefreshTokens } = useAuth();
+
   const [nameFilterValue, setNameFilterValue] = useState<string>();
   const { getFruits, fruits, setSearchFruitValue } = useHarvest();
 
@@ -58,6 +61,7 @@ function TableFilters() {
           className={"secondary-button " + (fruits.loading ? "disabled" : "")}
           onClick={() => {
             getFruits(fruits.pagination.page);
+            handleRefreshTokens();
           }}
         >
           Odśwież

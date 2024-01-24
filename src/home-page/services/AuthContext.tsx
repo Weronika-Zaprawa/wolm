@@ -1,10 +1,19 @@
 import { ReactElement, createContext, useContext, useState } from "react";
+import { LoginFormValues } from "../../authentication/LoginPage";
 
 type AuthContextType = {
   accessToken: string | null;
   refreshToken: string | null;
   saveTokens: (accessToken: string, refreshToken: string) => void;
   deleteTokens: () => void;
+  login: (values: LoginFormValues) => Promise<void>;
+  handleRefreshTokens: () => Promise<void>;
+  handleFetch: (url: string, options: RequestInit) => Promise<Response>;
+};
+
+type LoginResponse = {
+  access_token: string;
+  refresh_token: string;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -37,9 +46,59 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
     setRefreshToken(null);
   };
 
+  async function login(values: LoginFormValues) {
+    values.email = values.email.trim();
+    const response = await fetch(`https://wolm.onrender.com/login`, {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      alert("Podano błędny email lub hasło");
+    } else {
+      const token: LoginResponse = await response.json();
+      saveTokens(token.access_token, token.refresh_token);
+    }
+  }
+
+  async function handleRefreshTokens() {
+    const response = await fetch(`https://wolm.onrender.com/refresh`, {
+      method: "POST",
+      body: JSON.stringify({ refresh_token: refreshToken }),
+      headers: { "Content-Type": "application/json" },
+    });
+    if (response.ok) {
+      const token: LoginResponse = await response.json();
+      saveTokens(token.access_token, token.refresh_token);
+    } else {
+      deleteTokens();
+    }
+  }
+
+  async function handleFetch(url: string, options: RequestInit) {
+    const response = await fetch(url, {
+      ...options,
+      headers: {
+        ...options.headers,
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem(LOCAL_ACCESS_TOKEN_KEY) ?? "",
+      },
+    });
+    return response;
+  }
+
   return (
     <AuthContext.Provider
-      value={{ accessToken, refreshToken, saveTokens, deleteTokens }}
+      value={{
+        accessToken,
+        refreshToken,
+        saveTokens,
+        deleteTokens,
+        login,
+        handleRefreshTokens,
+        handleFetch,
+      }}
     >
       {children}
     </AuthContext.Provider>
