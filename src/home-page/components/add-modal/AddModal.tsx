@@ -3,7 +3,7 @@ import HarvestForm from "../harvest-form/HarvestForm";
 import { useRef, useState } from "react";
 import { PlusIcon } from "../../../images/icons";
 import { useHarvest } from "../../services/HarvestContext";
-import { LOCAL_TOKEN_KEY } from "../../services/AuthContext";
+import { useAuth } from "../../services/AuthContext";
 
 function AddModal({
   setAddModalVisible,
@@ -12,6 +12,8 @@ function AddModal({
 }) {
   const formRef = useRef<HTMLFormElement>(null);
   const { getFruits, fruits } = useHarvest();
+  const { handleFetch } = useAuth();
+
   const [formSubmitInProgress, setFormSubmitInProgress] =
     useState<boolean>(false);
 
@@ -25,13 +27,9 @@ function AddModal({
         <HarvestForm
           onSubmit={async (values) => {
             setFormSubmitInProgress(true);
-            await fetch(`https://wolm.onrender.com/harvests`, {
+            await handleFetch(`https://wolm.onrender.com/harvests`, {
               method: "POST",
               body: JSON.stringify(values),
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: localStorage.getItem(LOCAL_TOKEN_KEY) ?? "",
-              },
             });
 
             setAddModalVisible(false);

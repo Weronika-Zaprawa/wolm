@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./Tabs.scss";
 import { useHarvest } from "../../services/HarvestContext";
 

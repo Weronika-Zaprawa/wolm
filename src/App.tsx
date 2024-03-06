@@ -1,9 +1,9 @@
 import HomePage from "./home-page/HomePage";
-import LoginPage from "./home-page/components/login-page/LoginPage";
 import { useAuth } from "./home-page/services/AuthContext";
+import { AuthRoutes } from "./authentication/AuthRoutes";
 
 export default function App() {
-  const { token, saveToken, deleteToken } = useAuth();
+  const { accessToken } = useAuth();
 
-  return token === null ? <LoginPage /> : <HomePage />;
+  return accessToken === null ? <AuthRoutes /> : <HomePage />;
 }
