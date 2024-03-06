@@ -7,7 +7,6 @@
   z-index: 300; //ustawia wrapper nad rozmytym tłem
   width: 100%;
   height: calc(100% - 44px - 53px);
-  backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;

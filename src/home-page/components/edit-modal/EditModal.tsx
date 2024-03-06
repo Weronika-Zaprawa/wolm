@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 import { PencilOnPaperIcon } from "../../../images/icons";
 import { useHarvest } from "../../services/HarvestContext";
 import Spinner from "../spinner/Spinner";
-import { LOCAL_ACCESS_TOKEN_KEY, useAuth } from "../../services/AuthContext";
+import { useAuth } from "../../services/AuthContext";
 
 type EditModalProps = {
   setFruitToEditId: (fruitId: string | null) => void;

@@ -5,7 +5,7 @@ import {
   useState,
   useEffect,
 } from "react";
-import { LOCAL_ACCESS_TOKEN_KEY, useAuth } from "./AuthContext";
+import { useAuth } from "./AuthContext";
 
 type HarvestContextType = {
   fruits: FruitsState;

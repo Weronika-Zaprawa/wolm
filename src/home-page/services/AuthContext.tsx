@@ -6,7 +6,6 @@ import {
   useState,
 } from "react";
 import { LoginFormValues } from "../../authentication/LoginPage";
-import { resolve } from "path";
 
 type AuthContextType = {
   accessToken: string | null;
