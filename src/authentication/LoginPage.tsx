@@ -101,6 +101,18 @@ function LoginPage() {
             <span>ZALOGUJ SIĘ</span>
           </button>
           <button
+            type="button"
+            className="register-button"
+            onClick={() => {
+              handleLogin({
+                email: "wolmtestuser@gmail.com",
+                password: "zaq1@WSX",
+              });
+            }}
+          >
+            Zaloguj się jako gość
+          </button>
+          <button
             className="register-button"
             onClick={() => {
               navigate(AUTH_ROUTE_PATHS.REGISTER);

@@ -116,3 +116,14 @@ $row-gap: 16px;
     font-size: small;
   }
 }
+
+input[type="date"] {
+  position: relative;
+}
+
+::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
