@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useHarvest } from "../../services/HarvestContext";
-
+import "./TableFilters.scss";
 import { debounce } from "lodash";
 import { MagnifierIcon } from "../../../images/icons";
 import { XCircleIcon } from "../../../images/icons";
