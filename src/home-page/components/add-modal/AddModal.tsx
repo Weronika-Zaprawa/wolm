@@ -27,10 +27,13 @@ function AddModal({
         <HarvestForm
           onSubmit={async (values) => {
             setFormSubmitInProgress(true);
-            await handleFetch(`https://wolm.onrender.com/harvests`, {
-              method: "POST",
-              body: JSON.stringify(values),
-            });
+            await handleFetch(
+              `https://wolmbe-production.up.railway.app/harvests`,
+              {
+                method: "POST",
+                body: JSON.stringify(values),
+              }
+            );
 
             setAddModalVisible(false);
 

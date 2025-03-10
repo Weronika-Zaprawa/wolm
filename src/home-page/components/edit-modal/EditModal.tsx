@@ -39,7 +39,7 @@ function EditModal({ setFruitToEditId, fruitToEditId }: EditModalProps) {
           <HarvestForm
             onSubmit={async (values) => {
               await handleFetch(
-                `https://wolm.onrender.com/harvests/${fruitToEditId}`,
+                `https://wolmbe-production.up.railway.app/harvests/${fruitToEditId}`,
                 {
                   method: "PUT",
                   body: JSON.stringify(values),

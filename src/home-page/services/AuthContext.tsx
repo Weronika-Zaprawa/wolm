@@ -56,11 +56,14 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
 
   async function login(values: LoginFormValues) {
     values.email = values.email.trim();
-    const response = await fetch(`https://wolm.onrender.com/login`, {
-      method: "POST",
-      body: JSON.stringify(values),
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `https://wolmbe-production.up.railway.app/login`,
+      {
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
 
     if (!response.ok) {
       alert("Podano błędny email lub hasło");
@@ -72,11 +75,14 @@ export const AuthProvider = ({ children }: { children: ReactElement }) => {
 
   async function handleRefreshTokens() {
     refreshingTokens.current = true;
-    const response = await fetch(`https://wolm.onrender.com/refresh`, {
-      method: "POST",
-      body: JSON.stringify({ refresh_token: refreshToken }),
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `https://wolmbe-production.up.railway.app/refresh`,
+      {
+        method: "POST",
+        body: JSON.stringify({ refresh_token: refreshToken }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
 
     if (response.ok) {
       const token: LoginResponse = await response.json();

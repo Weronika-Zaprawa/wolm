@@ -99,7 +99,7 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
       return { ...prev, loading: true };
     });
     const response = await handleFetch(
-      `https://wolm.onrender.com/harvests?page=${index}&size=5&sort_by=amount&sort_order=asc&name=${searchFruitValue}&category=${activeTabName}`,
+      `https://wolmbe-production.up.railway.app/harvests?page=${index}&size=5&sort_by=amount&sort_order=asc&name=${searchFruitValue}&category=${activeTabName}`,
       {}
     );
 
@@ -121,7 +121,7 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
   async function getFruitDetails(fruitId: string) {
     setFruit(undefined);
     const response = await handleFetch(
-      `https://wolm.onrender.com/harvests/${fruitId}`,
+      `https://wolmbe-production.up.railway.app/harvests/${fruitId}`,
       {}
     );
 
@@ -132,15 +132,18 @@ export const HarvestProvider = ({ children }: { children: ReactElement }) => {
   }
 
   async function deleteFruit(fruitId: string) {
-    await handleFetch(`https://wolm.onrender.com/harvests/${fruitId}`, {
-      method: "DELETE",
-    });
+    await handleFetch(
+      `https://wolmbe-production.up.railway.app/harvests/${fruitId}`,
+      {
+        method: "DELETE",
+      }
+    );
     return;
   }
 
   async function getDictionary() {
     const responseDictionary = await handleFetch(
-      `https://wolm.onrender.com/harvests-dictionary`,
+      `https://wolmbe-production.up.railway.app/harvests-dictionary`,
       {}
     );
     const dictionary: ResponseDictionary = await responseDictionary.json();

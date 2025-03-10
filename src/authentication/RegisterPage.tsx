@@ -42,11 +42,17 @@ function RegisterPage() {
   async function userRegister(values: RegisterFormValues) {
     setLoading(true);
     values.email = values.email.trim();
-    const response = await fetch(`https://wolm.onrender.com/register`, {
-      method: "POST",
-      body: JSON.stringify({ email: values.email, password: values.password }),
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      `https://wolmbe-production.up.railway.app/register`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+        }),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     setLoading(false);
 
     if (!response.ok) {
